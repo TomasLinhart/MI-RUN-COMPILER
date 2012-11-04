@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using bsn.GoldParser.Semantic;
 
-namespace Scrappy.Parser
+namespace Scrappy.Parser.Nodes
 {
     public class Sequence<T> : BaseToken, IEnumerable<T> where T : BaseToken
     {

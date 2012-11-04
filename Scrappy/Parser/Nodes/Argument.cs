@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Scrappy.Parser.Terminals;
+﻿using Scrappy.Parser.Terminals;
 using bsn.GoldParser.Semantic;
 
-namespace Scrappy.Parser
+namespace Scrappy.Parser.Nodes
 {
     public class Argument : BaseToken
     {

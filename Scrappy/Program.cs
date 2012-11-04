@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Scrappy.Parser;
+using Scrappy.Parser.Nodes;
 using bsn.GoldParser.Grammar;
 using bsn.GoldParser.Parser;
 using bsn.GoldParser.Semantic;

@@ -41,19 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser\Argument.cs" />
-    <Compile Include="Parser\Block.cs" />
-    <Compile Include="Parser\Class.cs" />
-    <Compile Include="Parser\Method.cs" />
-    <Compile Include="Parser\Module.cs" />
+    <Compile Include="Parser\Nodes\Argument.cs" />
+    <Compile Include="Parser\Nodes\Block.cs" />
+    <Compile Include="Parser\Nodes\Class.cs" />
+    <Compile Include="Parser\Nodes\Method.cs" />
+    <Compile Include="Parser\Nodes\Module.cs" />
     <Compile Include="Parser\BaseToken.cs" />
-    <Compile Include="Parser\Property.cs" />
-    <Compile Include="Parser\Sequence.cs" />
-    <Compile Include="Parser\Start.cs" />
+    <Compile Include="Parser\Nodes\Property.cs" />
+    <Compile Include="Parser\Nodes\Sequence.cs" />
+    <Compile Include="Parser\Nodes\Start.cs" />
     <Compile Include="Parser\Terminals\Identifier.cs" />
     <Compile Include="Parser\Terminals\StringTerminal.cs" />
-    <Compile Include="Parser\Empty.cs" />
-    <Compile Include="Parser\Type.cs" />
+    <Compile Include="Parser\Nodes\Empty.cs" />
+    <Compile Include="Parser\Nodes\Type.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

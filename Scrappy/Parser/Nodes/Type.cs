@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Scrappy.Parser.Terminals;
+﻿using Scrappy.Parser.Terminals;
 using bsn.GoldParser.Semantic;
 
-namespace Scrappy.Parser
+namespace Scrappy.Parser.Nodes
 {
     public class Type : BaseToken
     {
@@ -21,8 +16,8 @@ namespace Scrappy.Parser
             GenericType = null;
         }
 
-        [Rule("<Type> ::= Identifier '[' <Type> ']'")]
-        public Type(Identifier identifier, BaseToken lb, Type type, BaseToken rb)
+        [Rule("<Type> ::= Identifier ~'[' <Type> ~']'")]
+        public Type(Identifier identifier, Type type)
         {
             Name = identifier.Value;
             GenericType = type;
@@ -31,7 +26,7 @@ namespace Scrappy.Parser
         public override string ToString()
         {
             if (HasGenericType)
-                return Name + "[" + GenericType.ToString() + "]";
+                return Name + "[" + GenericType + "]";
 
             return Name;
         }
