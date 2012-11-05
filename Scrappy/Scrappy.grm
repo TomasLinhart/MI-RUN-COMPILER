@@ -86,9 +86,22 @@ Comment Line = '--'
 
 <Argument> ::= Identifier ':' <Type>
 
-<Block> ::=
+! Block
+
+<Block> ::= <StatementList>
+         
+<StatementList> ::= <Statement> <StatementList>
+                 |
      
-       
+<Statement> ::= 'return' <Expression> <nl>
+             | <Expression> '=' <Expression> <nl>
+             
+
+<Expression> ::= <Expression> '@' Identifier
+              | '@' Identifier ! Property
+              | Identifier ! Local variable
+
+                     
 
 !<Expression>  ::= <Expression> '>'  <Add Exp> 
 !               |  <Expression> '<'  <Add Exp> 

@@ -14,6 +14,7 @@ namespace Scrappy.Parser.Nodes
         [Rule("<PropertyList> ::=", typeof(Property))]
         [Rule("<MethodList> ::=", typeof(Method))]
         [Rule("<ArgumentList> ::=", typeof(Argument))]
+        [Rule("<StatementList> ::=", typeof(Statement))]
         public Sequence(): this(null, null) {}
 
         [Rule("<ArgumentList> ::= <Argument>", typeof(Argument))]
@@ -24,6 +25,7 @@ namespace Scrappy.Parser.Nodes
         [Rule("<PropertyList> ::= <Property> <PropertyList>", typeof(Property))]
         [Rule("<MethodList> ::= <Method> <MethodList>", typeof(Method))]
         [Rule("<ArgumentList> ::= <Argument> ~',' <ArgumentList>", typeof(Argument))]
+        [Rule("<StatementList> ::= <Statement> <StatementList>", typeof(Statement))]
         public Sequence(T item, Sequence<T> next) {
                 this.item = item;
                 this.next = next;

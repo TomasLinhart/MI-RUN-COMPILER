@@ -19,6 +19,8 @@ namespace Scrappy.Parser
     [Terminal("]")]
     [Terminal(",")]
     [Terminal("def")]
+    [Terminal("=")]
+    [Terminal("return")]
     public class BaseToken : SemanticToken
     {
         

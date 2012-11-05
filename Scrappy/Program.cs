@@ -54,6 +54,11 @@ namespace Scrappy
                                 {
                                     Console.WriteLine("\t\t\tArgument: {0} Type: {1}", argument.Name, argument.Type);
                                 }
+
+                                foreach (var statement in method.Block.Statements)
+                                {
+                                    Console.WriteLine("\t\t\tStatement: {0}", statement);
+                                }
                             }
                         }
                     }

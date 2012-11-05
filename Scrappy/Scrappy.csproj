@@ -42,14 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parser\Nodes\Argument.cs" />
+    <Compile Include="Parser\Nodes\AssignStatement.cs" />
     <Compile Include="Parser\Nodes\Block.cs" />
     <Compile Include="Parser\Nodes\Class.cs" />
+    <Compile Include="Parser\Nodes\Expression.cs" />
+    <Compile Include="Parser\Nodes\ExpressionPropertyExpression.cs" />
     <Compile Include="Parser\Nodes\Method.cs" />
     <Compile Include="Parser\Nodes\Module.cs" />
     <Compile Include="Parser\BaseToken.cs" />
     <Compile Include="Parser\Nodes\Property.cs" />
+    <Compile Include="Parser\Nodes\PropertyExpression.cs" />
+    <Compile Include="Parser\Nodes\ReturnStatement.cs" />
     <Compile Include="Parser\Nodes\Sequence.cs" />
     <Compile Include="Parser\Nodes\Start.cs" />
+    <Compile Include="Parser\Nodes\Statement.cs" />
+    <Compile Include="Parser\Nodes\VariableExpression.cs" />
     <Compile Include="Parser\Terminals\Identifier.cs" />
     <Compile Include="Parser\Terminals\StringTerminal.cs" />
     <Compile Include="Parser\Nodes\Empty.cs" />
