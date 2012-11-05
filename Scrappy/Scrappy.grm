@@ -26,9 +26,22 @@ Whitespace    = {WS}+
 NewLine       = {CR}{LF} | {CR} | {LF}
 
 Identifier    = {ID Head}{ID Tail}*
+
+! Literals
+
+IntegerLiteral = {Digit}+
+FloatLiteral = {Digit}*'.'{Digit}+([Ee][+-]?{Digit}+)?
+
 StringLiteral = '"' {String Chars}* '"'
+
+BoolLiteral = 'YES' | 'NO'
+
+! Comments
               
 Comment Line = '--'
+             
+Comment Start = '(--'
+Comment End   = '--)'
 
 ! -------------------------------------------------
 ! Rules
@@ -94,13 +107,30 @@ Comment Line = '--'
                  |
      
 <Statement> ::= 'return' <Expression> <nl>
-             | <Expression> '=' <Expression> <nl>
-             
+             | <Assignable> '=' <Expression> <nl>
+             | 'let' Identifier ':' <Type> '=' <Expression> <nl>
+             |  <Expression> <nl>
 
-<Expression> ::= <Expression> '@' Identifier
+<Assignable> ::= <Expression> '@' Identifier
               | '@' Identifier ! Property
               | Identifier ! Local variable
+              
+<Literal> ::= IntegerLiteral
+           | FloatLiteral
+           | StringLiteral
+           | BoolLiteral
 
+<Expression> ::= <Expression> '@' Identifier
+              | <Expression> '#' Identifier '(' <ParameterList> ')'
+              | '@' Identifier ! Property
+              | Identifier ! Local variable
+              | <Literal>
+                            
+<ParameterList> ::= <Parameter> ',' <ParameterList>
+              | <Parameter>
+              |
+
+<Parameter> ::= <Expression>
                      
 
 !<Expression>  ::= <Expression> '>'  <Add Exp> 

@@ -7,6 +7,8 @@ namespace Scrappy.Parser
     [Terminal("(Whitespace)")]
     [Terminal("(Comment)")]
     [Terminal("(--)")]
+    [Terminal("((--)")]
+    [Terminal("(--))")]
     [Terminal("end")]
     [Terminal("NewLine")]
     [Terminal("module")]
@@ -21,6 +23,8 @@ namespace Scrappy.Parser
     [Terminal("def")]
     [Terminal("=")]
     [Terminal("return")]
+    [Terminal("#")]
+    [Terminal("let")]
     public class BaseToken : SemanticToken
     {
         

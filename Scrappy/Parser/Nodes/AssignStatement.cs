@@ -9,11 +9,11 @@ namespace Scrappy.Parser.Nodes
 {
     public class AssignStatement : Statement
     {
-        public Expression To { get; private set; }
+        public Assignable To { get; private set; }
         public Expression From { get; private set; }
 
-        [Rule("<Statement> ::= <Expression> ~'=' <Expression> ~<nl>")]
-        public AssignStatement(Expression to, Expression from)
+        [Rule("<Statement> ::= <Assignable> ~'=' <Expression> ~<nl>")]
+        public AssignStatement(Assignable to, Expression from)
         {
             To = to;
             From = from;

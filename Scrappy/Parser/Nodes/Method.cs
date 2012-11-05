@@ -10,7 +10,7 @@ namespace Scrappy.Parser.Nodes
         public Type Type { get; private set; }
         public Block Block { get; private set; }
 
-        [Rule("<Method> ::= ~def Identifier ~'(' <ArgumentList>  ~')' ~':' <Type> ~<nl> <Block> ~end ~<nl>")]
+        [Rule("<Method> ::= ~def Identifier ~'(' <ArgumentList> ~')' ~':' <Type> ~<nl> <Block> ~end ~<nl>")]
         public Method(Identifier identifier, Sequence<Argument> arguments, Type type, Block block)
         {
             Name = identifier.Value;
