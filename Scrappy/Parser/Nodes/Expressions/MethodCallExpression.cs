@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Scrappy.Parser.Terminals;
 using bsn.GoldParser.Semantic;
 
-namespace Scrappy.Parser.Nodes
+namespace Scrappy.Parser.Nodes.Expressions
 {
     public class MethodCallExpression : Expression
     {
@@ -14,7 +10,7 @@ namespace Scrappy.Parser.Nodes
         public string Method { get; private set; }
         public Sequence<Expression> Parameters { get; private set; }
 
-        [Rule("<Expression> ::= <Expression> ~'#' Identifier ~'(' <ParameterList> ~')'")]
+        [Rule("<ObjectExpression> ::= <ObjectExpression> ~'#' Identifier ~'(' <ParameterList> ~')'")]
         public MethodCallExpression(Expression expression, Identifier identifier, Sequence<Expression> parameters)
         {
             Expression = expression;

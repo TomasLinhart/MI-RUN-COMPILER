@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<classes>
+  <class name="EntryPoint">
+    <fields />
+    <methods>
+      <method name="Entry" type="Unit">
+        <args>
+          <arg name="arguments" type="Array[String]" />
+        </args>
+        <locals>
+           <local name="item1" type="Item" />
+           <local name="item2" type="Item" />
+           <local name="items" type="Array" />
+           <local name="instance" type="Instance" />
+        </locals>
+        <instructions>
+          <instruction>blabla</instruction>
+        </instructions>
+      </method>
+    </methods>
+  </class>
+  <class name="Item">
+    <fields>
+      <field name="Weight" type="Integer" />
+      <field name="Price" type="Integer" />
+    </fields>
+    <methods>
+      <method name="New" type="Item">
+        <args>
+          <arg name="weight" type="Integer" />
+          <arg name="price" type="Integer" />
+        </args>
+        <locals />
+        <instructions>
+          <instruction>blabla</instruction>
+        </instructions>
+      </method>
+    </methods>
+  </class>
+</classes>

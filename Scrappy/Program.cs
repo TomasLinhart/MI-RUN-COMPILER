@@ -2,6 +2,7 @@
 using System.IO;
 using Scrappy.Parser;
 using Scrappy.Parser.Nodes;
+using Scrappy.Compiler.Model;
 using bsn.GoldParser.Grammar;
 using bsn.GoldParser.Parser;
 using bsn.GoldParser.Semantic;
@@ -14,7 +15,7 @@ namespace Scrappy
         {
             Console.WriteLine("Language Scrappy Compiler 0.1");
             var grammar = CompiledGrammar.Load(typeof(Program), "Scrappy.cgt");
-            var actions = new SemanticTypeActions<BaseToken>(grammar);
+			var actions = new SemanticTypeActions<BaseToken>(grammar);
             try
             {
                 actions.Initialize(true);
@@ -26,16 +27,29 @@ namespace Scrappy
                 return;
             }
             
-            using (StreamReader reader = File.OpenText("Examples/Modules.sp"))
+            using (StreamReader reader = File.OpenText("Examples/Knapsack.sp"))
             {
                 var processor = new SemanticProcessor<BaseToken>(reader, actions);
                 ParseMessage parseMessage = processor.ParseAll();
                 if (parseMessage == ParseMessage.Accept)
                 {
+					var compilationModel = new CompilationModel();
                     var start = (Start) processor.CurrentToken;
+					start.Compile(compilationModel);
+
+					using (StreamWriter outfile = new StreamWriter("Knapsack.xml"))
+					{
+						outfile.Write(compilationModel.ToXml());
+					}
+
                     foreach (var module in start.Modules)
                     {
                         Console.WriteLine("Module: {0}", module.Name);
+
+                        foreach (var import in module.Imports)
+                        {
+                            Console.WriteLine("\tImport: {0}", import.Name);
+                        }
 
                         foreach (var @class in module.Classes)
                         {
@@ -66,7 +80,8 @@ namespace Scrappy
                 else
                 {
                     IToken token = processor.CurrentToken;
-                    Console.WriteLine("{0} {1}", "^".PadLeft(token.Position.Column), parseMessage);
+                    Console.WriteLine(token.Symbol);
+                    Console.WriteLine("Line: {0} Column: {1} Error: {2}", token.Position.Line, token.Position.Column, parseMessage);
                 }
             }
 

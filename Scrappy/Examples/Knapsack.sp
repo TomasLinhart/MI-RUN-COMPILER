@@ -2,7 +2,7 @@ module Knapsack
 
   class EntryPoint
 
-    def Entry(arguments : Array[String]) -- this method is launched by interpreter
+    def Entry(arguments : Array[String]) : Unit -- this method is launched by interpreter
       let item1 : Item = Item#New(1, 2)
       let item2 : Item = Item#New(2, 4)
       let items : Array[Item] = Array#New()
@@ -44,7 +44,7 @@ module Knapsack
     @BestPrice : Integer
     @BestSolutin : Array[Bool] -- Array is bult-in type
 
-    def New(instance : Instance)
+    def New(instance : Instance) : Solver
       @Instance = instance
       @Items = instance@Items
     end
@@ -55,7 +55,7 @@ module Knapsack
       @Self#SolveRecursive(array, 0)
 
       let i : Integer = 0
-      while (i <)
+      --while (i <)
     end
 
     def SolveRecursive(array : Array[Bool], position : Integer) : Unit
@@ -92,5 +92,7 @@ module Knapsack
     def ToString() : String
       return @BestSolution#ToString()
     end
+
   end
+
 end

@@ -8,6 +8,7 @@ module A
 
 		def method() : Unit
 			ahoj = @generic@world@hello
+			let a : Bool = YES
 		end
 	
 	end
@@ -15,9 +16,10 @@ module A
 end
 
 module Knapsack
- 
- class EntryPoint
- 
+  import A
+
+  class EntryPoint
+
     def Entry(arguments : Array[String]) : Unit -- this method is launched by interpreter
       let item1 : Item = Item#New(1, 2)
       let item2 : Item = Item#New(2, 4)
@@ -29,7 +31,7 @@ module Knapsack
     end
 
   end
-  
+
   class Item
     @Weight : Integer
     @Price : Integer
@@ -53,4 +55,85 @@ module Knapsack
       return @Self
     end
   end
+
+  class Solver
+    @Instance : Instance
+    @Items : Array[Item]
+    @BestPrice : Integer
+    @BestSolutin : Array[Bool] -- Array is bult-in type
+
+    def New(instance : Instance) : Solver
+      @Instance = instance
+      @Items = instance@Items
+    end
+
+    def Solve() : Unit
+      let array : Array[Item] = Array[Item]#New(10)
+
+      @Self#SolveRecursive(array, 0)
+
+      let i : Integer = 0
+      --while (i <)
+    end
+
+    def SolveRecursive(array : Array[Bool], position : Integer) : Unit
+      if (array@Length == position)
+        let totalPrice : Integer = 0
+        let totalWeight : Integer = 0
+
+        let i : Integer = 0
+        while (i < array@Length)
+          if (totalWeight > @Instance)
+            return Unit
+          end
+
+          if (array#At(i) == YES)
+            totalPrice = Integer#Plus(totalPrice, items#At(i)@Price)
+            totalWeight = Integer#Plus(totalWeight, items#At(i)@Weight)
+          end
+
+          i = Integer#plus(i, 1)
+        end
+
+        if (totalWeight <= @Instance@Capacity && totalPrice > @BestPrice)
+          Array#Copy(array, @BestSolution, array@Length)
+          @BestPrice = totalPrice
+        end
+
+        array#SetAt(position, NO)
+        @Self#SolveRecursive(array, Integer#Add(position, 1))
+        array#SetAt(position, YES)
+        @Self#SolveRecursive(array, Integer#Add(position, 1))
+      end
+    end
+
+    def ToString() : String
+      return @BestSolution#ToString()
+    end
+
+  end
+
+end
+
+module Future
+(--	
+	interface PlusOperator[T]
+		@hello : Integer
+
+		dec Plus(left : T, right : T)
+	end
+	
+	class Integer implements PlusOperator[Integer]
+		def Plus(a : Integer, b : Integer)
+			
+		end
+	end
+
+	class Console
+		def WriteLine(text : String)
+			%net.call("Console.WriteLine", text)
+		end
+	end
+--)
+
 end

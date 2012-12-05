@@ -1,4 +1,5 @@
 ﻿using bsn.GoldParser.Semantic;
+using Scrappy.Compiler.Model;
 
 namespace Scrappy.Parser.Nodes
 {
@@ -11,5 +12,13 @@ namespace Scrappy.Parser.Nodes
         {
             Modules = modules;
         }
+
+		public override void Compile(CompilationModel model)
+		{
+			foreach (var module in Modules)
+			{
+				module.Compile(model);
+			}
+		}
     }
 }

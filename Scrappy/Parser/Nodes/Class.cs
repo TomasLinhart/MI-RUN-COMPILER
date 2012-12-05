@@ -1,5 +1,6 @@
 ﻿using Scrappy.Parser.Terminals;
 using bsn.GoldParser.Semantic;
+using Scrappy.Compiler.Model;
 
 namespace Scrappy.Parser.Nodes
 {
@@ -16,5 +17,20 @@ namespace Scrappy.Parser.Nodes
             Properties = properties;
             Methods = methods;
         }
+
+		public override void Compile(CompilationModel model)
+		{
+			model.Classes.Add(new ClassModel(Name));
+
+			foreach (var property in Properties)
+			{
+				property.Compile(model);
+			}
+
+			foreach (var method in Methods)
+			{
+				method.Compile(model);
+			}
+		}
     }
 }

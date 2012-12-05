@@ -11,12 +11,14 @@
     <AssemblyName>Scrappy</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -25,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -41,30 +43,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser\Nodes\ExpressionStatement.cs" />
+    <Compile Include="Parser\Nodes\Import.cs" />
+    <Compile Include="Parser\Nodes\Statements\ExpressionStatement.cs" />
     <Compile Include="Parser\Nodes\Argument.cs" />
     <Compile Include="Parser\Nodes\Assignable.cs" />
-    <Compile Include="Parser\Nodes\AssignStatement.cs" />
+    <Compile Include="Parser\Nodes\Statements\AssignStatement.cs" />
     <Compile Include="Parser\Nodes\Block.cs" />
     <Compile Include="Parser\Nodes\Class.cs" />
-    <Compile Include="Parser\Nodes\Expression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\AddExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\AndExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\CastExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\DivideExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\EqualExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\Expression.cs" />
     <Compile Include="Parser\Nodes\ExpressionPropertyAssignable.cs" />
-    <Compile Include="Parser\Nodes\ExpressionPropertyExpression.cs" />
-    <Compile Include="Parser\Nodes\LetStatement.cs" />
-    <Compile Include="Parser\Nodes\LiteralExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\ExpressionPropertyExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\GenericVariableExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\LessThanExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\LessThanOrEqualExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\MinusExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\ModuloExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\MoreThanExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\MoreThanOrEqualExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\MultiplyExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\NegateExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\NotEqualExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\OrExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\ShiftLeftExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\ShiftRightExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\SubtractExpression.cs" />
+    <Compile Include="Parser\Nodes\Statements\IfElseStatement.cs" />
+    <Compile Include="Parser\Nodes\Statements\IfStatement.cs" />
+    <Compile Include="Parser\Nodes\Statements\LetStatement.cs" />
+    <Compile Include="Parser\Nodes\Expressions\LiteralExpression.cs" />
     <Compile Include="Parser\Nodes\Method.cs" />
-    <Compile Include="Parser\Nodes\MethodCallExpression.cs" />
+    <Compile Include="Parser\Nodes\Expressions\MethodCallExpression.cs" />
     <Compile Include="Parser\Nodes\Module.cs" />
     <Compile Include="Parser\BaseToken.cs" />
     <Compile Include="Parser\Nodes\Property.cs" />
     <Compile Include="Parser\Nodes\PropertyAssignable.cs" />
-    <Compile Include="Parser\Nodes\PropertyExpression.cs" />
-    <Compile Include="Parser\Nodes\ReturnStatement.cs" />
+    <Compile Include="Parser\Nodes\Expressions\PropertyExpression.cs" />
+    <Compile Include="Parser\Nodes\Statements\ReturnStatement.cs" />
     <Compile Include="Parser\Nodes\Sequence.cs" />
     <Compile Include="Parser\Nodes\Start.cs" />
-    <Compile Include="Parser\Nodes\Statement.cs" />
-    <Compile Include="Parser\Nodes\VariableAssignable.cs" />
-    <Compile Include="Parser\Nodes\VariableExpression.cs" />
+    <Compile Include="Parser\Nodes\Statements\Statement.cs" />
+    <Compile Include="Parser\Nodes\Statements\VariableAssignable.cs" />
+    <Compile Include="Parser\Nodes\Expressions\VariableExpression.cs" />
+    <Compile Include="Parser\Nodes\Statements\WhileStatement.cs" />
     <Compile Include="Parser\Terminals\BoolLiteral.cs" />
     <Compile Include="Parser\Terminals\FloatLiteral.cs" />
     <Compile Include="Parser\Terminals\Identifier.cs" />
@@ -73,15 +98,29 @@
     <Compile Include="Parser\Terminals\StringLiteral.cs" />
     <Compile Include="Parser\Nodes\Empty.cs" />
     <Compile Include="Parser\Nodes\Type.cs" />
+    <Compile Include="Typing\MethodSignature.cs" />
+    <Compile Include="Typing\PropertySignature.cs" />
+    <Compile Include="Typing\TypeSignature.cs" />
+    <Compile Include="Typing\TypeSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Compiler\Model\CompilationModel.cs" />
+    <Compile Include="Compiler\Model\ClassModel.cs" />
+    <Compile Include="Compiler\Model\MethodModel.cs" />
+    <Compile Include="Compiler\Model\FieldModel.cs" />
+    <Compile Include="Compiler\Model\InstructionModel.cs" />
+    <Compile Include="Compiler\Model\LocalModel.cs" />
+    <Compile Include="Compiler\Model\Xmlable.cs" />
+    <Compile Include="Compiler\Model\ArgumentModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <EmbeddedResource Include="Scrappy.cgt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="Examples\Knapsack.sp" />
+    <None Include="Examples\Knapsack.sp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Examples\Modules.sp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -92,9 +131,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\bsn.GoldParser-1.3.4084\bsn.GoldParser\bsn.GoldParser.csproj">
-      <Project>{1a1a5ae9-7981-471c-9cc7-f7465e675a32}</Project>
+      <Project>{1A1A5AE9-7981-471C-9CC7-F7465E675A32}</Project>
       <Name>bsn.GoldParser</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Examples\Knapsack.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -104,4 +146,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Compiler\" />
+    <Folder Include="Compiler\Model\" />
+  </ItemGroup>
 </Project>

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Scrappy.Parser.Terminals;
+﻿using Scrappy.Parser.Terminals;
 using bsn.GoldParser.Semantic;
 
-namespace Scrappy.Parser.Nodes
+namespace Scrappy.Parser.Nodes.Expressions
 {
     public class LiteralExpression : Expression
     {
         public Literal Literal { get; private set; }
 
-        [Rule("<Expression> ::= <Literal>")]
+        [Rule("<ObjectExpression> ::= <Literal>")]
         public LiteralExpression(Literal literal)
         {
             Literal = literal;

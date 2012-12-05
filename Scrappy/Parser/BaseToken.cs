@@ -1,4 +1,5 @@
 ﻿using bsn.GoldParser.Semantic;
+using Scrappy.Compiler.Model;
 
 namespace Scrappy.Parser
 {
@@ -25,9 +26,31 @@ namespace Scrappy.Parser
     [Terminal("return")]
     [Terminal("#")]
     [Terminal("let")]
+    [Terminal("if")]
+    [Terminal("while")]
+    [Terminal("else")]
+    [Terminal("||")]
+    [Terminal("&&")]
+    [Terminal("==")]
+    [Terminal("!=")]
+    [Terminal("<")]
+    [Terminal(">")]
+    [Terminal("<=")]
+    [Terminal(">=")]
+    [Terminal("<<")]
+    [Terminal(">>")]
+    [Terminal("+")]
+    [Terminal("-")]
+    [Terminal("*")]
+    [Terminal("/")]
+    [Terminal("%")]
+    [Terminal("!")]
+    [Terminal("import")]
     public class BaseToken : SemanticToken
     {
-        
+		public virtual void Compile(CompilationModel model)
+		{
+		}
     }
 
 }

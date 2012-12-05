@@ -1,5 +1,7 @@
 ﻿using Scrappy.Parser.Terminals;
+using Scrappy.Compiler.Model;
 using bsn.GoldParser.Semantic;
+using System.Linq;
 
 namespace Scrappy.Parser.Nodes
 {
@@ -18,5 +20,19 @@ namespace Scrappy.Parser.Nodes
             Type = type;
             Block = block;
         }
+
+		public override void Compile(CompilationModel model)
+		{
+			var methodModel = new MethodModel(Name, Type.Name);
+			model.Classes.Last().Methods.Add(methodModel);
+			methodModel.Locals.AddRange(Block.GetLocals());
+
+			foreach (var arg in Arguments)
+			{
+				methodModel.Arguments.Add(new ArgumentModel(arg.Name, arg.Type.Name));
+			}
+
+			methodModel.Instructions.Add(new InstructionModel("test"));
+		}
     }
 }

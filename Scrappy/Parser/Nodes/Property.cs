@@ -1,5 +1,7 @@
 ﻿using Scrappy.Parser.Terminals;
+using Scrappy.Compiler.Model;
 using bsn.GoldParser.Semantic;
+using System.Linq;
 
 namespace Scrappy.Parser.Nodes
 {
@@ -14,5 +16,10 @@ namespace Scrappy.Parser.Nodes
             Name = identifier.Value;
             Type = type;
         }
+
+		public override void Compile(CompilationModel model)
+		{
+			model.Classes.Last().Fields.Add(new FieldModel(Name, Type.Name));
+		}
     }
 }
