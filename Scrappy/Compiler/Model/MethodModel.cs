@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Scrappy.Compiler.Model
@@ -25,22 +26,14 @@ namespace Scrappy.Compiler.Model
 		public string ToXml()
 		{
 			StringBuilder builder = new StringBuilder();
-			if (IsConstructor)
-			{
-				builder.AppendFormat("\t\t\t<constructor name=\"{0}\" type=\"{1}\">", Name, Type);
-			}
-			else
-			{
-				builder.AppendFormat("\t\t\t<method name=\"{0}\" type=\"{1}\">", Name, Type);
-			}
-			builder.AppendLine();
 
-			builder.AppendLine("\t\t\t\t<args>");
-			foreach (var arg in Arguments)
-			{
-				builder.AppendLine(arg.ToXml());
-			}
-			builder.AppendLine("\t\t\t\t</args>");
+			builder.AppendFormat("\t\t\t<{0} name=\"{1}:{2}\" type=\"{3}\">", 
+			                     IsConstructor ? "constructor" : "method",
+				                 Name, 
+				                 String.Join(":", Arguments.Select (a => a.Type).ToArray()),
+				                 Type);
+
+			builder.AppendLine();
 
 			builder.AppendLine("\t\t\t\t<locals>");
 			foreach (var local in Locals)
