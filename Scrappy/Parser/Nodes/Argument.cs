@@ -13,6 +13,7 @@ namespace Scrappy.Parser.Nodes
         {
             Name = identifier.Value;
             Type = type;
+            Type.Parent = this;
         }
     }
 }

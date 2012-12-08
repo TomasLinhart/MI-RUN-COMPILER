@@ -21,6 +21,7 @@ namespace Scrappy.Parser.Nodes
         {
             Name = identifier.Value;
             GenericType = type;
+            GenericType.Parent = this;
         }
 
         public override string ToString()

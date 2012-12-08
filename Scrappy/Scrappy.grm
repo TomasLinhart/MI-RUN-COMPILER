@@ -113,6 +113,8 @@ Comment End   = '--)'
                  |  
      
 <Statement> ::= 'return' <Expression> <nl>
+             | 'return' <nl>
+             | 'emit' StringLiteral <nl>
              |  <Assignable> '=' <Expression> <nl>
              |  'let' Identifier ':' <Type> '=' <Expression> <nl>
              |  <Expression> <nl>
@@ -168,6 +170,7 @@ Comment End   = '--)'
 <ObjectExpression> ::= <ObjectExpression> '#' Identifier '(' <ParameterList> ')'
                     |  <ObjectExpression> '@' Identifier
                     |  '@' Identifier ! Property
+                    |  Identifier '(' <ParameterList> ')'
                     |  Identifier '[' <Type> ']'
                     |  Identifier ! Local variable or Static
                     |  <Literal>

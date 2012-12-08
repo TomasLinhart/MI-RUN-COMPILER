@@ -16,6 +16,16 @@ namespace Scrappy.Parser.Nodes
             Name = identifier.Value;
             Imports = imports;
             Classes = classes;
+
+            foreach (var import in imports)
+            {
+                import.Parent = this;
+            }
+
+            foreach (var @class in classes)
+            {
+                @class.Parent = this;
+            }
         }
 
 		public override void Compile(CompilationModel model)

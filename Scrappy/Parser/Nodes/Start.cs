@@ -11,9 +11,14 @@ namespace Scrappy.Parser.Nodes
         public Start(Sequence<Module> modules)
         {
             Modules = modules;
+
+            foreach (var module in modules)
+            {
+                module.Parent = this;
+            }
         }
 
-		public override void Compile(CompilationModel model)
+        public override void Compile(CompilationModel model)
 		{
 			foreach (var module in Modules)
 			{

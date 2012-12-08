@@ -26,66 +26,79 @@ namespace Scrappy
                 Console.ReadKey(true);
                 return;
             }
-            
-            using (StreamReader reader = File.OpenText("Examples/Knapsack.sp"))
+
+            try
             {
-                var processor = new SemanticProcessor<BaseToken>(reader, actions);
-                ParseMessage parseMessage = processor.ParseAll();
-                if (parseMessage == ParseMessage.Accept)
+                using (StreamReader reader = File.OpenText("Examples/Knapsack.sp"))
                 {
-					var compilationModel = new CompilationModel();
-                    var start = (Start) processor.CurrentToken;
-					start.Compile(compilationModel);
-
-					using (StreamWriter outfile = new StreamWriter("Knapsack.xml"))
-					{
-						outfile.Write(compilationModel.ToXml());
-					}
-
-                    foreach (var module in start.Modules)
+                    var processor = new SemanticProcessor<BaseToken>(reader, actions);
+                    ParseMessage parseMessage = processor.ParseAll();
+                    if (parseMessage == ParseMessage.Accept)
                     {
-                        Console.WriteLine("Module: {0}", module.Name);
+                        var compilationModel = new CompilationModel(File.ReadAllLines("Examples/Knapsack.sp"));
+                        var start = (Start)processor.CurrentToken;
+                        start.Compile(compilationModel); // first classes, fields and methods needs to be compiled
+                        compilationModel.Compile(); // after that compile method body
 
-                        foreach (var import in module.Imports)
+                        using (var outfile = new StreamWriter("Knapsack.xml"))
                         {
-                            Console.WriteLine("\tImport: {0}", import.Name);
+                            outfile.Write(compilationModel.ToXml());
                         }
 
-                        foreach (var @class in module.Classes)
-                        {
-                            Console.WriteLine("\tClass: {0}", @class.Name);
-
-                            foreach (var property in @class.Properties)
-                            {
-                                Console.WriteLine("\t\tProperty: {0} Type: {1}", property.Name, property.Type);
-                            }
-
-                            foreach (var method in @class.Methods)
-                            {
-                                Console.WriteLine("\t\tMethod: {0} Type: {1}", method.Name, method.Type);
-
-                                foreach (var argument in method.Arguments)
-                                {
-                                    Console.WriteLine("\t\t\tArgument: {0} Type: {1}", argument.Name, argument.Type);
-                                }
-
-                                foreach (var statement in method.Block.Statements)
-                                {
-                                    Console.WriteLine("\t\t\tStatement: {0}", statement);
-                                }
-                            }
-                        }
+                        PrintAst(start);
+                    }
+                    else
+                    {
+                        IToken token = processor.CurrentToken;
+                        Console.WriteLine(token.Symbol);
+                        Console.WriteLine("Line: {0} Column: {1} Error: {2}", token.Position.Line, token.Position.Column, parseMessage);
                     }
                 }
-                else
-                {
-                    IToken token = processor.CurrentToken;
-                    Console.WriteLine(token.Symbol);
-                    Console.WriteLine("Line: {0} Column: {1} Error: {2}", token.Position.Line, token.Position.Column, parseMessage);
-                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
 
             Console.ReadKey();
+        }
+
+        private static void PrintAst(Start start)
+        {
+            foreach (var module in start.Modules)
+            {
+                Console.WriteLine("Module: {0}", module.Name);
+
+                foreach (var import in module.Imports)
+                {
+                    Console.WriteLine("\tImport: {0}", import.Name);
+                }
+
+                foreach (var @class in module.Classes)
+                {
+                    Console.WriteLine("\tClass: {0}", @class.Name);
+
+                    foreach (var property in @class.Properties)
+                    {
+                        Console.WriteLine("\t\tProperty: {0} Type: {1}", property.Name, property.Type);
+                    }
+
+                    foreach (var method in @class.Methods)
+                    {
+                        Console.WriteLine("\t\tMethod: {0} Type: {1}", method.Name, method.Type);
+
+                        foreach (var argument in method.Arguments)
+                        {
+                            Console.WriteLine("\t\t\tArgument: {0} Type: {1}", argument.Name, argument.Type);
+                        }
+
+                        foreach (var statement in method.Block.Statements)
+                        {
+                            Console.WriteLine("\t\t\tStatement: {0}", statement);
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using bsn.GoldParser.Semantic;
+﻿using System;
+using bsn.GoldParser.Semantic;
 using Scrappy.Compiler.Model;
+using System.Collections.Generic;
 
 namespace Scrappy.Parser
 {
@@ -46,10 +48,33 @@ namespace Scrappy.Parser
     [Terminal("%")]
     [Terminal("!")]
     [Terminal("import")]
+    [Terminal("emit")]
     public class BaseToken : SemanticToken
     {
+        public BaseToken Parent { get; set; }
+
+        public T FindParent<T>() where T : BaseToken
+        {
+            if (GetType() == typeof (T))
+            {
+                return (T) this;
+            }
+
+            return Parent.FindParent<T>();
+        }
+
+        public virtual void PrepareModel(CompilationModel model)
+        {
+            
+        }
+
 		public virtual void Compile(CompilationModel model)
 		{
+		}
+
+		public virtual List<InstructionModel> GetInstructions(CompilationModel model)
+		{
+			return new List<InstructionModel>();
 		}
     }
 

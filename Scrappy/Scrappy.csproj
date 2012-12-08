@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parser\Nodes\Import.cs" />
+    <Compile Include="Parser\Nodes\Statements\EmitStatement.cs" />
     <Compile Include="Parser\Nodes\Statements\ExpressionStatement.cs" />
     <Compile Include="Parser\Nodes\Argument.cs" />
     <Compile Include="Parser\Nodes\Assignable.cs" />
@@ -87,7 +88,7 @@
     <Compile Include="Parser\Nodes\Sequence.cs" />
     <Compile Include="Parser\Nodes\Start.cs" />
     <Compile Include="Parser\Nodes\Statements\Statement.cs" />
-    <Compile Include="Parser\Nodes\Statements\VariableAssignable.cs" />
+    <Compile Include="Parser\Nodes\VariableAssignable.cs" />
     <Compile Include="Parser\Nodes\Expressions\VariableExpression.cs" />
     <Compile Include="Parser\Nodes\Statements\WhileStatement.cs" />
     <Compile Include="Parser\Terminals\BoolLiteral.cs" />
@@ -112,6 +113,9 @@
     <Compile Include="Compiler\Model\LocalModel.cs" />
     <Compile Include="Compiler\Model\Xmlable.cs" />
     <Compile Include="Compiler\Model\ArgumentModel.cs" />
+    <Compile Include="Helpers\ListExtensions.cs" />
+    <Compile Include="Compiler\Instructions.cs" />
+    <Compile Include="Compiler\BuiltinTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -146,8 +150,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Compiler\" />
-    <Folder Include="Compiler\Model\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

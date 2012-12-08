@@ -8,5 +8,6 @@ namespace Scrappy.Parser.Terminals
 {
     public abstract class Literal : BaseToken
     {
+        public abstract string GetLiteralType();
     }
 }

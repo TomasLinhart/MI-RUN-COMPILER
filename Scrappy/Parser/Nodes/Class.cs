@@ -16,6 +16,16 @@ namespace Scrappy.Parser.Nodes
             Name = identifier.Value;
             Properties = properties;
             Methods = methods;
+
+			foreach (var property in Properties)
+			{
+				property.Parent = this;
+			}
+
+            foreach (var method in Methods)
+            {
+                method.Parent = this;
+            }
         }
 
 		public override void Compile(CompilationModel model)

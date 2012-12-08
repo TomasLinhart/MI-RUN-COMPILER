@@ -6,26 +6,31 @@ using Scrappy.Compiler.Model;
 
 namespace Scrappy.Parser.Nodes
 {
-    public class Block : BaseToken
-    {
-        public Sequence<Statement> Statements { get; private set; }
-        
-        [Rule("<Block> ::= <StatementList>")]
-        public Block(Sequence<Statement> statements)
-        {
-            Statements = statements;
-        }
+	public class Block : BaseToken
+	{
+		public Sequence<Statement> Statements { get; private set; }
+		
+		[Rule("<Block> ::= <StatementList>")]
+		public Block(Sequence<Statement> statements)
+		{
+			Statements = statements;
 
-        public override string ToString()
-        {
-            var builder = new StringBuilder();
-            builder.AppendLine();
-            foreach (var statement in Statements)
-            {
-                builder.AppendLine(statement.ToString());
-            }
-            return builder.ToString();
-        }
+			foreach (var statement in Statements)
+			{
+				statement.Parent = this;
+			}
+		}
+
+		public override string ToString()
+		{
+			var builder = new StringBuilder();
+			builder.AppendLine();
+			foreach (var statement in Statements)
+			{
+				builder.AppendLine(statement.ToString());
+			}
+			return builder.ToString();
+		}
 
 		public List<LocalModel> GetLocals()
 		{
@@ -56,5 +61,15 @@ namespace Scrappy.Parser.Nodes
 			}
 			return locals;
 		}
-    }
+
+        public override List<InstructionModel> GetInstructions(CompilationModel model)
+        {
+            var instructions = new List<InstructionModel>();
+            foreach (var statement in Statements)
+            {
+                instructions.AddRange(statement.GetInstructions(model));
+            }
+            return instructions;
+        }
+	}
 }

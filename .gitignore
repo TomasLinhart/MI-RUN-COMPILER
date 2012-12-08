@@ -63,7 +63,7 @@ _ReSharper*
 *.ncrunch*
 .*crunch*.local.xml
 
-# Installshield output folder 
+# Installshield output folder
 [Ee]xpress
 
 # DocProject is a documentation generator add-in
@@ -154,3 +154,9 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+#------------------
+# Dropbox
+#------------------
+
+*:com.dropbox.attributes

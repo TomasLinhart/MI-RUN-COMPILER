@@ -1,4 +1,7 @@
 ﻿using bsn.GoldParser.Semantic;
+using System.Collections.Generic;
+using Scrappy.Compiler;
+using Scrappy.Compiler.Model;
 
 namespace Scrappy.Parser.Nodes.Expressions
 {
@@ -10,6 +13,7 @@ namespace Scrappy.Parser.Nodes.Expressions
         public NegateExpression(Expression expression)
         {
             Expression = expression;
+            Expression.Parent = this;
         }
 
         public override string ToString()
