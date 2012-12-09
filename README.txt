@@ -6,6 +6,8 @@ Ke spuštění je potřeba Windows s .NET 4.5 a ke kompilaci Visual Studio 2012.
 
 V případě, že chcete projekt zkompilovat, tak stačí otevřít Scrappy.sln v daném vývojovém prostředí a spustit kompilaci. Následně vývojové prostředí výsledek i pustí. Pokud nechcete kompilovat, tak součástí je zkompilována verze, kterou lze spustit v případě Windows:
 
+Zkompilováná verze je v Scrappy/bin/Release/Scrappy.exe
+
 $ Scrappy.exe Examples/Knapsack.sp
 
 V případě Mono:

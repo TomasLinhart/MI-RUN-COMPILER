@@ -29,8 +29,7 @@ namespace Scrappy
             }
             catch (InvalidOperationException ex)
             {
-                Console.Write(ex.Message);
-                Console.ReadKey(true);
+                Console.Write("Error: " + ex.Message);
                 return;
             }
 
@@ -44,10 +43,12 @@ namespace Scrappy
                     ParseMessage parseMessage = processor.ParseAll();
                     if (parseMessage == ParseMessage.Accept)
                     {
+						Console.WriteLine("Parsing done.");
 						var compilationModel = new CompilationModel(File.ReadAllLines(path));
                         var start = (Start)processor.CurrentToken;
                         start.Compile(compilationModel); // first classes, fields and methods needs to be compiled
                         compilationModel.Compile(); // after that compile method body
+						Console.WriteLine("Compiling done.");
 
 						using (var outfile = new StreamWriter(outputName))
                         {
@@ -60,13 +61,13 @@ namespace Scrappy
                     {
                         IToken token = processor.CurrentToken;
                         Console.WriteLine(token.Symbol);
-                        Console.WriteLine("Line: {0} Column: {1} Error: {2}", token.Position.Line, token.Position.Column, parseMessage);
+                        Console.WriteLine("Error: Line: {0} Column: {1} Error: {2}", token.Position.Line, token.Position.Column, parseMessage);
                     }
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine("Error" + e.Message);
             }
         }
 
