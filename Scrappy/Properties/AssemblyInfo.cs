@@ -39,4 +39,3 @@ using bsn.GoldParser.Semantic;
 
 [assembly: RuleTrim("<nl> ::= NewLine <nl>", "<nl>", SemanticTokenType = typeof(BaseToken))]
 [assembly: RuleTrim("<nl Opt> ::= NewLine <nl Opt>", "<nl Opt>", SemanticTokenType = typeof(BaseToken))]
-//[assembly: RuleTrim("<nl Opt> ::=", "<nl Opt>", SemanticTokenType = typeof(BaseToken))]

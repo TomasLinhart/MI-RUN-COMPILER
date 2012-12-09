@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Scrappy.Parser.Nodes;
+using Scrappy.Parser.Nodes.Expressions;
 
 namespace Scrappy.Compiler.Model
 {
@@ -11,6 +13,7 @@ namespace Scrappy.Compiler.Model
         public bool Skip { get; private set; }
 		public List<FieldModel> Fields { get; private set; }
 		public List<MethodModel> Methods { get; private set; }
+		public CompilationModel CompilationModel { get; private set; }
 
 		public ClassModel(string name, bool skip = false)
 		{
@@ -50,14 +53,41 @@ namespace Scrappy.Compiler.Model
             throw new Exception(string.Format("Method with name {0} not found!", name));
         }
 
-        public MethodModel GetMethodWithArgsCount(string name, int argsCount)
+		public MethodModel GetMethodWithArgs(string name, Sequence<Expression> args, CompilationModel model)
         {
-            var method = Methods.SingleOrDefault(f => f.Name == name && f.Arguments.Count == argsCount);
+			var argsList = args.ToList();
+			MethodModel tmpMethod = null;
+			MethodModel method = null;
+			foreach (var m in Methods.Where(m => m.Name == name && m.Arguments.Count == argsList.Count))
+			{
+				if (method == null) // to handle methods without parameters
+				{
+					method = m;
+				}
+
+				for (int i = 0; i < m.Arguments.Count; i++)
+				{
+					if (m.Arguments[i].Type == argsList[i].GetExpressionType(model) || m.Arguments[i].Type == BuiltinTypes.Any)
+					{
+						tmpMethod = m;
+					}
+					else
+					{
+						tmpMethod = null;
+					}
+				}
+
+				if (tmpMethod != null)
+				{
+					method = tmpMethod;
+				}
+			}
+
             if (method != null)
             {
                 return method;
             }
-            throw new Exception(string.Format("Method with with name {0} and {1} args not found!", name, argsCount));
+			throw new Exception(string.Format("Method with with name {0} and {1} args not found!", name, argsList.Count));
         }
 
         public void Compile(CompilationModel model)

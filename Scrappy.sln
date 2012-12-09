@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scrappy", "Scrappy\Scrappy.csproj", "{040240E8-86EA-4FE0-BCF9-39153DCA580F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bsn.GoldParser", "..\bsn.GoldParser-1.3.4084\bsn.GoldParser\bsn.GoldParser.csproj", "{1A1A5AE9-7981-471C-9CC7-F7465E675A32}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +13,10 @@ Global
 		{040240E8-86EA-4FE0-BCF9-39153DCA580F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{040240E8-86EA-4FE0-BCF9-39153DCA580F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{040240E8-86EA-4FE0-BCF9-39153DCA580F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A1A5AE9-7981-471C-9CC7-F7465E675A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A1A5AE9-7981-471C-9CC7-F7465E675A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A1A5AE9-7981-471C-9CC7-F7465E675A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A1A5AE9-7981-471C-9CC7-F7465E675A32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Scrappy\Scrappy.csproj
+		version = 1.0
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

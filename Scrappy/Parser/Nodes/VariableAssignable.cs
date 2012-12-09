@@ -3,6 +3,7 @@ using bsn.GoldParser.Semantic;
 using System.Collections.Generic;
 using Scrappy.Compiler;
 using Scrappy.Compiler.Model;
+using System.Globalization;
 
 namespace Scrappy.Parser.Nodes
 {
@@ -27,14 +28,15 @@ namespace Scrappy.Parser.Nodes
             var @class = (Class) method.Parent;
             var methodModel = model.GetClass(@class.Name).GetMethod(method.FullName);
             var type = methodModel.GetVariableType(Variable);
+			var index = methodModel.GetVariableIndex(Variable).ToString(CultureInfo.InvariantCulture);
             var instructions = new List<InstructionModel>();
             if (type == BuiltinTypes.Integer)
             {
-                instructions.Add(new InstructionModel(Instructions.StoreIntInstruction) { Comment = model.GetComment(this) + " - assigning variable" });
+				instructions.Add(new InstructionModel(Instructions.StoreIntInstruction, index) { Comment = model.GetComment(this) + " - assigning variable" });
             }
             else
             {
-                instructions.Add(new InstructionModel(Instructions.StorePointerInstruction) { Comment = model.GetComment(this) + " - assigning variable" });
+				instructions.Add(new InstructionModel(Instructions.StorePointerInstruction, index) { Comment = model.GetComment(this) + " - assigning variable" });
             }
 
             return instructions;

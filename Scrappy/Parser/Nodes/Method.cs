@@ -4,6 +4,7 @@ using Scrappy.Compiler.Model;
 using bsn.GoldParser.Semantic;
 using System.Linq;
 using Scrappy.Helpers;
+using Scrappy.Compiler;
 
 namespace Scrappy.Parser.Nodes
 {
@@ -44,6 +45,8 @@ namespace Scrappy.Parser.Nodes
 			{
 				methodModel.Arguments.Add(new ArgumentModel(arg.Name, arg.Type.Name));
 			}
+									
+			methodModel.Locals.Add(new LocalModel(LocalModel.TempVariable, BuiltinTypes.Any));
 		}
     }
 }

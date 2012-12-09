@@ -1,7 +1,7 @@
 ﻿"Name"     = 'Scrappy'
-"Author"   = 'Tomáš Linhart'
-"Version"  = '0.1'
-"About"    = 'A short description of the grammar'
+"Author"   = 'Tomáš Linhart & Václav Chalupa'
+"Version"  = '1.0'
+"About"    = 'Scrappy is a simple language for MI-RUN course on CTU FIT.'
 
 "Start Symbol" = <Start>
 

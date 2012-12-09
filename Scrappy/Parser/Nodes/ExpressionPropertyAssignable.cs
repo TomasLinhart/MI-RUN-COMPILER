@@ -8,6 +8,7 @@ using Scrappy.Compiler.Model;
 using Scrappy.Parser.Nodes.Expressions;
 using Scrappy.Parser.Terminals;
 using bsn.GoldParser.Semantic;
+using System.Globalization;
 
 namespace Scrappy.Parser.Nodes
 {
@@ -31,12 +32,10 @@ namespace Scrappy.Parser.Nodes
 
         public override List<InstructionModel> GetInstructions(CompilationModel model)
         {
-            var method = FindParent<Method>();
-            var @class = (Class)method.Parent;
-            var classModel = model.GetClass(@class.Name);
             var instructions = new List<InstructionModel>();
-            instructions.AddRange(Expression.GetInstructions(model));
-            instructions.Add(new InstructionModel(Instructions.SetFieldInstruction) { Comment = model.GetComment(this) + " - setting field on expression" });
+			var index = model.GetClass(Expression.GetExpressionType(model)).GetFieldIndex(Property).ToString(CultureInfo.InvariantCulture);
+			instructions.AddRange(Expression.GetInstructions(model));
+            instructions.Add(new InstructionModel(Instructions.SetFieldInstruction, index) { Comment = model.GetComment(this) + " - setting field on expression" });
             return instructions;
         }
     }

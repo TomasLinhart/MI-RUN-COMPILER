@@ -4,9 +4,6 @@ namespace Scrappy.Parser.Nodes.Expressions
 {
     public abstract class Expression : BaseToken
     {
-		public virtual string GetExpressionType(CompilationModel model)
-		{
-			return "Unknown";
-		}
+		public abstract string GetExpressionType(CompilationModel model);
     }
 }

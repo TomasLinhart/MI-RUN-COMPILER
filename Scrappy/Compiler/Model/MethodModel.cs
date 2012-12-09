@@ -104,20 +104,10 @@ namespace Scrappy.Compiler.Model
         {
             Instructions.AddRange(Block.GetInstructions(model));
 
-            // TODO: It might refactored so there is not duplicity
-
-            if (Instructions.Count == 0) // if none instructions then it must be empty method, lets emit return
-            {
-                Instructions.Add(new InstructionModel(Compiler.Instructions.ReturnInstruction));
-                Instructions.Latest().Comment = "Added by compiler";
-                return;
-            }
-
             // add return instruction on end if it isnt already there
-            var lastInstruction = Instructions.Latest();
-            if (lastInstruction.Value != Compiler.Instructions.ReturnInstruction &&
-                lastInstruction.Value != Compiler.Instructions.ReturnIntInstruction &&
-                lastInstruction.Value != Compiler.Instructions.ReturnPointerInstruction)
+			if (Instructions.Count == 0 || (Instructions.Latest().Value != Compiler.Instructions.ReturnInstruction &&
+			    Instructions.Latest().Value != Compiler.Instructions.ReturnIntInstruction &&
+			    Instructions.Latest().Value != Compiler.Instructions.ReturnPointerInstruction))
             {
                 Instructions.Add(new InstructionModel(Compiler.Instructions.ReturnInstruction));
                 Instructions.Latest().Comment = "Added by compiler";

@@ -1,54 +1,56 @@
 module Scrappy
 
-  class Array
+  class List
     @Length : Integer
     @ArrayPointer : Integer
 
-    def New(size : Integer) : Array
-      emit "iload 1"
-      emit "dup"
-      emit "iload 0"
+    def New() : List
+      emit "getfield 1"
+      emit "invokevirtual size:"
+      emit "pload 0"
       emit "setfield 0"
-      emit "newarray"
-      emit "iload 0"
-      emit "setfield 1"
+      emit "return"
+    end
+
+    def New(size : Integer) : List
+      emit "iload 1" -- load size
+      emit "dup" -- duplicate it
+      emit "pload 0" -- load self
+      emit "setfield 0" -- set first field
+      emit "newarray" -- alloc new array, size is from iload 1
+      emit "pload 0" -- load self
+      emit "setfield 1" -- set it on self
       emit "return"
     end
 
     def SetAt(index : Integer, item : Any) : Unit
       if (index <= @Length)
-        emit "iload 2" -- item
         emit "iload 1" -- index
-        emit "iload 0" -- self
+        emit "pload 2" -- item
+        emit "pload 0" -- self
         emit "getfield 1" -- array pointer
         emit "setfield"
-        emit "return"
       end
-      emit "return"
     end
 
     def At(index : Integer) : Any
-      if (index <= @Length)
         emit "iload 1" -- index
-        emit "iload 0" -- self
+        emit "pload 0" -- self
         emit "getfield 1" -- array pointer
         emit "getfield"
         emit "preturn"
-      end
-      emit "ppush 0"
-      emit "preturn"
     end
 
     def Copy() : Unit
-     -- make copy
-	   let bool : Bool = YES
-	   let float : Float = 3.14
-	   let integer : Integer = 5
-	   let string : String = "hello world"
-    end
-
-    def ToString() : String
-      return "hello, i'm array"
+    	let newList : List = List#New(@Length)
+    	
+    	let i : Integer = 0
+    	while (i < @Length)
+    	   newList#SetAt(i, At(i))
+    	   i = i + 1
+    	end
+    	
+    	return newList
     end
 
   end
@@ -59,17 +61,53 @@ module Knapsack
 
   class EntryPoint
 
-    def Entry(arguments : Array) : Unit -- this method is launched by interpreter
-      let item1 : Item = Item#New(1, 2)
-      let item2 : Item = Item#New(2, 4)
-      let items : Array = Array#New(2)
-      items#SetAt(0, item1)
-      items#SetAt(1, item2)
-      let instance : Instance = Instance#New(2, 5, items)
-      -- Console#WriteLine(instance#Solve()#ToString())
-	  emit "return"
-    end
+    def Entry(args : Array) : Unit -- this method is launched by interpreter
+      let reader : FileReader = FileReader#New()
+      reader#open("data.txt")
+      let line : String = reader#readLine()
+      let parts : Array = line#split()
+      let listParts : List = List#New(parts#size())
+      listParts@ArrayPointer = parts
 
+	  let itemsCountString : String = (String) listParts#At(0)
+	  let capacityString : String = (String) listParts#At(1)
+	  let itemsCount : Integer = itemsCountString#toInteger()
+	  let capacity : Integer = capacityString#toInteger()
+	  let items : List = List#New(itemsCount)
+	  let instance : Instance = Instance#New(itemsCount, capacity, items)
+	  let i : Integer = 2
+	  let j : Integer = 0
+	  
+	  while (i < parts#size())
+	  	let weightString : String = (String) listParts#At(i)
+	  	let priceString  : String = (String) listParts#At(i + 1)
+	  	let weight : Integer = weightString#toInteger()
+	  	let price : Integer = priceString#toInteger()
+	  	let item : Item = Item#New(weight, price)
+	  	items#SetAt(j, item)
+	  	i = i + 2
+	  	j = j + 1
+	  end
+	  
+	  let solver : Solver = Solver#New(instance)
+      let bestSolution : List = solver#Solve()
+            
+      i = 0
+      let result : String = " "
+      result = result#append(solver@BestPrice)
+      while (i < bestSolution@Length)
+        result = result#append(" ")
+        result = result#append((Integer) bestSolution#At(i))
+      	i = i + 1
+      end
+                  
+      let writer : FileWriter = FileWriter#New()
+      writer#open("result.txt")
+      writer#writeLine(result)
+      
+      reader#close()
+      writer#close()
+    end
   end
 
   class Item
@@ -85,9 +123,9 @@ module Knapsack
   class Instance
     @Quantity : Integer
     @Capacity : Integer
-    @Items : Array
+    @Items : List
 
-    def New(quantity : Integer, capacity : Integer, items : Array) : Instance
+    def New(quantity : Integer, capacity : Integer, items : List) : Instance
       @Quantity = quantity
       @Capacity = capacity
       @Items = items
@@ -96,9 +134,9 @@ module Knapsack
 
   class Solver
     @Instance : Instance
-    @Items : Array
+    @Items : List
     @BestPrice : Integer
-    @BestSolution : Array -- Array is bult-in type
+    @BestSolution : List
 
     def New(instance : Instance) : Solver
       @Instance = instance
@@ -106,22 +144,23 @@ module Knapsack
     end
 
     def Solve() : Unit
-      let array : Array = Array#New(10)
-
+      let array : List = List#New(@Instance@Quantity)
+	  @BestSolution = array
+	  @BestPrice = 0
+	  
       SolveRecursive(array, 0)
-
-      let i : Integer = 0
-      --while (i <) -- TODO: finish it
+            
+      return @BestSolution
     end
 
-    def SolveRecursive(array : Array, position : Integer) : Unit
+    def SolveRecursive(array : List, position : Integer) : Unit
       if (array@Length == position)
         let totalPrice : Integer = 0
         let totalWeight : Integer = 0
-
+        
         let i : Integer = 0
         while (i < array@Length)
-          if (totalWeight > @Instance)
+          if (totalWeight > @Instance@Capacity)
             return
           end
 
@@ -130,24 +169,23 @@ module Knapsack
             totalPrice = totalPrice + item@Price
             totalWeight = totalWeight + item@Weight
           end
-
+		
           i = i + 1
         end
-
+		
+		
         if (totalWeight <= @Instance@Capacity && totalPrice > @BestPrice)
-          @BestSolution = Array#Copy()
+          @BestSolution = array#Copy()
           @BestPrice = totalPrice
         end
-
-        array#SetAt(position, NO)
-        SolveRecursive(array, position + 1)
-        array#SetAt(position, YES)
-        SolveRecursive(array, position + 1)
+        
+        return
       end
-    end
 
-    def ToString() : String
-      return @BestSolution#ToString()
+      array#SetAt(position, NO)
+      SolveRecursive(array, position + 1)
+      array#SetAt(position, YES)
+      SolveRecursive(array, position + 1)
     end
 
   end

@@ -6,6 +6,7 @@ using bsn.GoldParser.Semantic;
 using System.Collections.Generic;
 using Scrappy.Compiler;
 using Scrappy.Compiler.Model;
+using System.Globalization;
 
 namespace Scrappy.Parser.Nodes.Expressions
 {
@@ -56,21 +57,21 @@ namespace Scrappy.Parser.Nodes.Expressions
 
         public override List<InstructionModel> GetInstructions(CompilationModel model)
         {
-            var fullName = string.Format("{0}:{1}", Method, String.Join(":", Parameters.Select(e => e.GetExpressionType(model))));
-
             var instructions = new List<InstructionModel>();
             ClassModel classModel = null;
             bool isStaticCall = false;
+			string tmpIndex = null;
             if (Expression is VariableExpression) // calling static method
             {
                 var variable = (VariableExpression) Expression;
                 var method = FindParent<Method>();
                 var @class = (Class) method.Parent;
                 // first try to find it in locals in that case it would be local variable
-                try
-                {
-                    model.GetClass(@class.Name).GetMethod(method.FullName).GetVariableIndex(variable.Variable);
-                    classModel = model.GetClass(Expression.GetExpressionType(model));
+				tmpIndex = model.GetClass(@class.Name).GetMethod(method.FullName).GetVariableIndex(LocalModel.TempVariable).ToString(CultureInfo.InvariantCulture);
+				try
+				{
+					model.GetClass(@class.Name).GetMethod(method.FullName).GetVariableIndex(variable.Variable);
+                    
                 }
                 catch (Exception)
                 {
@@ -78,6 +79,7 @@ namespace Scrappy.Parser.Nodes.Expressions
                     classModel = model.GetClass(variableClass.Variable);
                     isStaticCall = true;
                 }
+				classModel = model.GetClass(Expression.GetExpressionType(model));
             }
             else
             {
@@ -95,7 +97,8 @@ namespace Scrappy.Parser.Nodes.Expressions
             {
                 var @class = (VariableExpression) Expression;
                 instructions.Add(new InstructionModel(Instructions.NewInstruction, @class.Variable) { Comment = model.GetComment(this) + " - creating new instance" });
-                instructions.Add(new InstructionModel(Instructions.DupInstruction) { Comment = model.GetComment(this) + " - duplicating for constructor call" });
+                instructions.Add(new InstructionModel(Instructions.StorePointerInstruction, tmpIndex) { Comment = model.GetComment(this) + " - storing in tmp variable" });
+				instructions.Add(new InstructionModel(Instructions.LoadPointerInstruction, tmpIndex) { Comment = model.GetComment(this) + " - loading from tmp variable" });
             }
             else if (Expression != null)
             {
@@ -106,7 +109,21 @@ namespace Scrappy.Parser.Nodes.Expressions
                 instructions.Add(new InstructionModel(Instructions.LoadPointerInstruction, "0") { Comment = model.GetComment(this) + " - loading self" });
             }
 
-            instructions.Add(new InstructionModel(Instructions.CallInstruction, classModel.GetMethodWithArgsCount(Method, Parameters.Count()).FullName) { Comment = model.GetComment(this) + " - doing method call" });
+			try
+			{
+            	instructions.Add(new InstructionModel(Instructions.CallInstruction, classModel.GetMethodWithArgs(Method, Parameters, model).FullName) { Comment = model.GetComment(this) + " - doing method call" });
+				if (isStaticCall)
+				{
+					instructions.Add(new InstructionModel(Instructions.LoadPointerInstruction, tmpIndex) { Comment = model.GetComment(this) + " - loading from tmp variable" });
+				}
+			}
+			catch (Exception e)
+			{
+				if (Method != "New" && Parameters.Count() != 0)
+				{
+					throw e;
+				}
+			}
 
             return instructions;
         }

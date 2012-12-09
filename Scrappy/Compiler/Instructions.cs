@@ -33,11 +33,11 @@ namespace Scrappy.Compiler
 		public static readonly string StoreIntInstruction = "istore";
 		public static readonly string StorePointerInstruction = "pstore";
 		public static readonly string JumpInstruction = "jump";
-		public static readonly string ArrayLengthInstruction = "arraylength";
 		public static readonly string NewStringInstruction = "newstring";
 	    public static readonly string DupInstruction = "dup";
         public static readonly string LogicalAndIntInstruction = "iand";
         public static readonly string LogicalOrIntInstruction = "ior";
         public static readonly string LogicalNegIntInstruction = "ineg";
+		public static readonly string PopValueInstruction = "popvalue";
 	}
 }

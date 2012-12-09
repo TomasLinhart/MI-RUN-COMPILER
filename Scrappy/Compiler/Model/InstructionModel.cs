@@ -29,7 +29,7 @@ namespace Scrappy.Compiler.Model
 
             if (!string.IsNullOrEmpty(Comment))
             {
-                sb.AppendFormat(" <!-- {0} -->", Comment);
+                sb.AppendFormat(" <!-- {0} -->", Comment.Replace("--", "//"));
             }
 
 		    return sb.ToString();

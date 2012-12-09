@@ -21,11 +21,50 @@ namespace Scrappy.Compiler.Model
 
         public void AddDefaultLibraries()
         {
-            Classes.Add(new ClassModel("String", true));
-            Classes.Add(new ClassModel("Integer", true));
+			var stringClass = new ClassModel("String", true);
+			stringClass.Methods.Add(new MethodModel("length", "Integer"));
+			var appendStringMethod = new MethodModel("append", "Integer");
+			appendStringMethod.Arguments.Add(new ArgumentModel("appendString", "String"));
+			var appendIntegerMethod = new MethodModel("append", "Integer");
+			appendIntegerMethod.Arguments.Add(new ArgumentModel("appendInteger", "Integer"));
+			stringClass.Methods.Add(appendIntegerMethod);
+			stringClass.Methods.Add(appendStringMethod);
+			stringClass.Methods.Add(new MethodModel("split", "String"));
+			stringClass.Methods.Add(new MethodModel("toInteger", "Integer"));
+
+			Classes.Add(stringClass);
+			Classes.Add(new ClassModel("Integer", true));
             Classes.Add(new ClassModel("Any", true));
             Classes.Add(new ClassModel("Bool", true));
             Classes.Add(new ClassModel("Float", true));
+			Classes.Add(new ClassModel("Unit", true));
+
+			var fileReaderClass = new ClassModel("FileReader", true);
+			fileReaderClass.Fields.Add(new FieldModel("readerReference", "Integer"));
+			var openMethod = new MethodModel("open", BuiltinTypes.Unit);
+			openMethod.Arguments.Add(new ArgumentModel("s", "String"));
+			fileReaderClass.Methods.Add(openMethod);
+			fileReaderClass.Methods.Add(new MethodModel("readLine", "String"));
+			fileReaderClass.Methods.Add(new MethodModel("close", "Unit"));
+
+			Classes.Add(fileReaderClass);
+
+			var fileWriterClass = new ClassModel("FileWriter", true);
+			fileWriterClass.Fields.Add(new FieldModel("writerReference", "Integer"));
+			var openWriterMethod = new MethodModel("open", BuiltinTypes.Unit);
+			openWriterMethod.Arguments.Add(new ArgumentModel("s", "String"));
+			fileWriterClass.Methods.Add(openWriterMethod);
+			var writeLineMethod = new MethodModel("writeLine", BuiltinTypes.Unit);
+			writeLineMethod.Arguments.Add(new ArgumentModel("s", "String"));
+			fileWriterClass.Methods.Add(writeLineMethod);
+			fileWriterClass.Methods.Add(new MethodModel("close", "Unit"));
+
+			Classes.Add(fileWriterClass);
+
+			var arrayClass = new ClassModel("Array", true);
+			arrayClass.Methods.Add(new MethodModel("size", "Integer"));
+
+			Classes.Add(arrayClass);
         }
 
 		public ClassModel GetClass(string type)
@@ -64,7 +103,7 @@ namespace Scrappy.Compiler.Model
 
 		public void Compile()
 		{
-			foreach (var classModel in Classes)
+			foreach (var classModel in Classes.Where(c => !c.Skip))
 			{
 				classModel.Compile(this);
 			}   

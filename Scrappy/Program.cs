@@ -13,7 +13,14 @@ namespace Scrappy
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Language Scrappy Compiler 0.1");
+			Console.WriteLine("Language Scrappy Compiler 1.0");
+
+			if (args.Length == 0)
+			{
+				Console.WriteLine("usage: Scrappy <file.sp>");
+				return;
+			}
+
             var grammar = CompiledGrammar.Load(typeof(Program), "Scrappy.cgt");
 			var actions = new SemanticTypeActions<BaseToken>(grammar);
             try
@@ -29,23 +36,25 @@ namespace Scrappy
 
             try
             {
-                using (StreamReader reader = File.OpenText("Examples/Knapsack.sp"))
+				var path = args[0];
+				var outputName = Path.GetFileNameWithoutExtension(path) + ".xml";
+				using (var reader = File.OpenText(path))
                 {
                     var processor = new SemanticProcessor<BaseToken>(reader, actions);
                     ParseMessage parseMessage = processor.ParseAll();
                     if (parseMessage == ParseMessage.Accept)
                     {
-                        var compilationModel = new CompilationModel(File.ReadAllLines("Examples/Knapsack.sp"));
+						var compilationModel = new CompilationModel(File.ReadAllLines(path));
                         var start = (Start)processor.CurrentToken;
                         start.Compile(compilationModel); // first classes, fields and methods needs to be compiled
                         compilationModel.Compile(); // after that compile method body
 
-                        using (var outfile = new StreamWriter("Knapsack.xml"))
+						using (var outfile = new StreamWriter(outputName))
                         {
                             outfile.Write(compilationModel.ToXml());
                         }
 
-                        PrintAst(start);
+                        // PrintAst(start); // only for debugging
                     }
                     else
                     {
@@ -59,8 +68,6 @@ namespace Scrappy
             {
                 Console.WriteLine(e.Message);
             }
-
-            Console.ReadKey();
         }
 
         private static void PrintAst(Start start)

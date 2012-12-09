@@ -7,6 +7,7 @@ using Scrappy.Compiler;
 using Scrappy.Compiler.Model;
 using Scrappy.Parser.Terminals;
 using bsn.GoldParser.Semantic;
+using System.Globalization;
 
 namespace Scrappy.Parser.Nodes
 {
@@ -30,9 +31,10 @@ namespace Scrappy.Parser.Nodes
             var method = FindParent<Method>();
             var @class = (Class)method.Parent;
             var classModel = model.GetClass(@class.Name);
+			var index = classModel.GetFieldIndex(Property).ToString(CultureInfo.InvariantCulture);
             var instructions = new List<InstructionModel>();
             instructions.Add(new InstructionModel(Instructions.LoadPointerInstruction, "0") { Comment = model.GetComment(this) + " - setting field" });
-            instructions.Add(new InstructionModel(Instructions.SetFieldInstruction) { Comment = model.GetComment(this) + " - setting field" });
+            instructions.Add(new InstructionModel(Instructions.SetFieldInstruction, index) { Comment = model.GetComment(this) + " - setting field" });
             return instructions;
         }
     }
