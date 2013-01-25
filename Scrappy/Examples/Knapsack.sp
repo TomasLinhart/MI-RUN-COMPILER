@@ -6,7 +6,7 @@ module Scrappy
 
     def New() : List
       emit "getfield 1"
-      emit "invokevirtual size:"
+      emit "invokevirtual Array::size:"
       emit "vload 0"
       emit "setfield 0"
       emit "return"

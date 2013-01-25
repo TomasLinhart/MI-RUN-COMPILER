@@ -36,7 +36,7 @@ namespace Scrappy.Parser.Nodes
 
 		public override void Compile(CompilationModel model)
 		{
-			model.Classes.Add(new ClassModel(Name, ParentName));
+            model.Classes.Add(new ClassModel(Name, ParentName, model));
 
 			foreach (var property in Properties)
 			{

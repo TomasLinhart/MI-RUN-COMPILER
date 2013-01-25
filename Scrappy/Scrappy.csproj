@@ -48,6 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Parser\Nodes\Expressions\ParentMethodCallExpression.cs" />
     <Compile Include="Parser\Nodes\Import.cs" />
     <Compile Include="Parser\Nodes\Statements\EmitStatement.cs" />
     <Compile Include="Parser\Nodes\Statements\ExpressionStatement.cs" />

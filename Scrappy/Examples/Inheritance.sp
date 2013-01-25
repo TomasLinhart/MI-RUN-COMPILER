@@ -7,14 +7,16 @@
 	end
 
 	class B : A
-		@Super : A
-
 		def Test() : String
 			return "B"
 		end
 
 		def MyTest() : String
-			return @Super#Test()
+			return parent::Test()
+		end
+
+		def SecondTest() : String
+			return A::Test()
 		end
 	end
 

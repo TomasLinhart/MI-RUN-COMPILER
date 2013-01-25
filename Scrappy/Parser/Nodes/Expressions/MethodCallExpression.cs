@@ -111,7 +111,7 @@ namespace Scrappy.Parser.Nodes.Expressions
 
 			try
 			{
-            	instructions.Add(new InstructionModel(Instructions.CallInstruction, classModel.GetMethodWithArgs(Method, Parameters, model).FullName) { Comment = model.GetComment(this) + " - doing method call" });
+                instructions.Add(new InstructionModel(Instructions.CallInstruction, string.Format("{0}::{1}", classModel.Name, classModel.GetMethodWithArgs(Method, Parameters, model).FullName)) { Comment = model.GetComment(this) + " - doing method call" });
 				if (isStaticCall)
 				{
 					instructions.Add(new InstructionModel(Instructions.LoadPointerInstruction, tmpIndex) { Comment = model.GetComment(this) + " - loading from tmp variable" });

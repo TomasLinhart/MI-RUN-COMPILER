@@ -49,6 +49,7 @@ namespace Scrappy.Parser
     [Terminal("!")]
     [Terminal("import")]
     [Terminal("emit")]
+    [Terminal("::")]
     public class BaseToken : SemanticToken
     {
         public BaseToken Parent { get; set; }

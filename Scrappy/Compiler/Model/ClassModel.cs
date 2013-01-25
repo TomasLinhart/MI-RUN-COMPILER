@@ -15,14 +15,16 @@ namespace Scrappy.Compiler.Model
 		public List<FieldModel> Fields { get; private set; }
 		public List<MethodModel> Methods { get; private set; }
 		public CompilationModel CompilationModel { get; private set; }
+        public ClassModel ParentClassModel { get { return CompilationModel.GetClass(ParentName); } }
 
-        public ClassModel(string name, bool skip = false)
-            : this(name, "Any", skip) { }
+        public ClassModel(string name, CompilationModel model, bool skip = false)
+            : this(name, "Any", model, skip) { }
 
-		public ClassModel(string name, string parentName, bool skip = false)
+        public ClassModel(string name, string parentName, CompilationModel model, bool skip = false)
 		{
 			Name = name;
 		    ParentName = parentName;
+            CompilationModel = model;
 		    Skip = skip;
 			Fields = new List<FieldModel>();
 			Methods = new List<MethodModel>();

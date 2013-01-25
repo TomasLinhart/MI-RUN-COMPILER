@@ -21,7 +21,7 @@ namespace Scrappy.Compiler.Model
 
         public void AddDefaultLibraries()
         {
-			var stringClass = new ClassModel("String", true);
+			var stringClass = new ClassModel("String", this, true);
 			stringClass.Methods.Add(new MethodModel("length", "Integer"));
 			var appendStringMethod = new MethodModel("append", "Integer");
 			appendStringMethod.Arguments.Add(new ArgumentModel("appendString", "String"));
@@ -33,13 +33,13 @@ namespace Scrappy.Compiler.Model
 			stringClass.Methods.Add(new MethodModel("toInteger", "Integer"));
 
 			Classes.Add(stringClass);
-			Classes.Add(new ClassModel("Integer", true));
-            Classes.Add(new ClassModel("Any", true));
-            Classes.Add(new ClassModel("Bool", true));
-            Classes.Add(new ClassModel("Float", true));
-			Classes.Add(new ClassModel("Unit", true));
+            Classes.Add(new ClassModel("Integer", this, true));
+            Classes.Add(new ClassModel("Any", this, true));
+            Classes.Add(new ClassModel("Bool", this, true));
+            Classes.Add(new ClassModel("Float", this, true));
+            Classes.Add(new ClassModel("Unit", this, true));
 
-			var fileReaderClass = new ClassModel("FileReader", true);
+            var fileReaderClass = new ClassModel("FileReader", this, true);
 			fileReaderClass.Fields.Add(new FieldModel("readerReference", "Integer"));
 			var openMethod = new MethodModel("open", BuiltinTypes.Unit);
 			openMethod.Arguments.Add(new ArgumentModel("s", "String"));
@@ -49,7 +49,7 @@ namespace Scrappy.Compiler.Model
 
 			Classes.Add(fileReaderClass);
 
-			var fileWriterClass = new ClassModel("FileWriter", true);
+            var fileWriterClass = new ClassModel("FileWriter", this, true);
 			fileWriterClass.Fields.Add(new FieldModel("writerReference", "Integer"));
 			var openWriterMethod = new MethodModel("open", BuiltinTypes.Unit);
 			openWriterMethod.Arguments.Add(new ArgumentModel("s", "String"));
@@ -61,7 +61,7 @@ namespace Scrappy.Compiler.Model
 
 			Classes.Add(fileWriterClass);
 
-			var arrayClass = new ClassModel("Array", true);
+            var arrayClass = new ClassModel("Array", this, true);
 			arrayClass.Methods.Add(new MethodModel("size", "Integer"));
 
 			Classes.Add(arrayClass);
