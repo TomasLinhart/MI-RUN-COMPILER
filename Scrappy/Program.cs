@@ -6,7 +6,6 @@ using Scrappy.Compiler.Model;
 using bsn.GoldParser.Grammar;
 using bsn.GoldParser.Parser;
 using bsn.GoldParser.Semantic;
-
 namespace Scrappy
 {
     class Program
@@ -21,7 +20,7 @@ namespace Scrappy
 				return;
 			}
 
-            var grammar = CompiledGrammar.Load(typeof(Program), "Scrappy.cgt");
+            var grammar = CompiledGrammar.Load(typeof(Program), "Scrappy.egt");
 			var actions = new SemanticTypeActions<BaseToken>(grammar);
             try
             {

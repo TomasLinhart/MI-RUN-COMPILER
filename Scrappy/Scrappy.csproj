@@ -120,12 +120,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EmbeddedResource Include="Scrappy.cgt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <None Include="Examples\Knapsack.sp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <EmbeddedResource Include="Scrappy.egt" />
     <None Include="Scrappy.grm" />
   </ItemGroup>
   <ItemGroup>
