@@ -120,6 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Examples\Inheritance.sp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Examples\Knapsack.sp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

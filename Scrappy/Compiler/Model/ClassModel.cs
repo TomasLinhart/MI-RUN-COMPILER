@@ -10,14 +10,19 @@ namespace Scrappy.Compiler.Model
 	public class ClassModel : Xmlable
 	{
 		public string Name { get; private set; }
+        public string ParentName { get; private set; }
         public bool Skip { get; private set; }
 		public List<FieldModel> Fields { get; private set; }
 		public List<MethodModel> Methods { get; private set; }
 		public CompilationModel CompilationModel { get; private set; }
 
-		public ClassModel(string name, bool skip = false)
+        public ClassModel(string name, bool skip = false)
+            : this(name, "Any", skip) { }
+
+		public ClassModel(string name, string parentName, bool skip = false)
 		{
 			Name = name;
+		    ParentName = parentName;
 		    Skip = skip;
 			Fields = new List<FieldModel>();
 			Methods = new List<MethodModel>();
@@ -103,7 +108,7 @@ namespace Scrappy.Compiler.Model
 		public string ToXml()
 		{
             StringBuilder builder = new StringBuilder();
-			builder.AppendFormat("\t<class name=\"{0}\">", Name);
+		    builder.AppendFormat("\t<class name=\"{0}\" parentName=\"{1}\">", Name, ParentName);
 			builder.AppendLine();
 			
 			builder.AppendLine("\t\t<fields>");

@@ -79,6 +79,7 @@ Comment End   = '--)'
              |  
              
 <Class> ::= 'class' Identifier <nl> <PropertyList> <MethodList> 'end' <nl>
+         | 'class' Identifier ':' Identifier <nl> <PropertyList> <MethodList> 'end' <nl>
 
 <Type> ::= Identifier
         |  Identifier '[' <Type> ']'
