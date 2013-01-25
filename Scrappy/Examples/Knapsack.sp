@@ -7,38 +7,38 @@ module Scrappy
     def New() : List
       emit "getfield 1"
       emit "invokevirtual size:"
-      emit "pload 0"
+      emit "vload 0"
       emit "setfield 0"
       emit "return"
     end
 
     def New(size : Integer) : List
-      emit "iload 1" -- load size
+      emit "vload 1" -- load size
       emit "dup" -- duplicate it
-      emit "pload 0" -- load self
+      emit "vload 0" -- load self
       emit "setfield 0" -- set first field
       emit "newarray" -- alloc new array, size is from iload 1
-      emit "pload 0" -- load self
+      emit "vload 0" -- load self
       emit "setfield 1" -- set it on self
       emit "return"
     end
 
     def SetAt(index : Integer, item : Any) : Unit
       if (index <= @Length)
-        emit "iload 1" -- index
-        emit "pload 2" -- item
-        emit "pload 0" -- self
+        emit "vload 1" -- index
+        emit "vload 2" -- item
+        emit "vload 0" -- self
         emit "getfield 1" -- array pointer
         emit "setfield"
       end
     end
 
     def At(index : Integer) : Any
-        emit "iload 1" -- index
-        emit "pload 0" -- self
+        emit "vload 1" -- index
+        emit "vload 0" -- self
         emit "getfield 1" -- array pointer
         emit "getfield"
-        emit "preturn"
+        emit "vreturn"
     end
 
     def Copy() : Unit

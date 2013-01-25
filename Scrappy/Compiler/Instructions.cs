@@ -11,8 +11,8 @@ namespace Scrappy.Compiler
 		public static readonly string CallInstruction = "invokevirtual";
 		public static readonly string GetFieldInstruction = "getfield";
 		public static readonly string SetFieldInstruction = "setfield";
-		public static readonly string ReturnIntInstruction = "ireturn";
-		public static readonly string ReturnPointerInstruction = "preturn";
+		public static readonly string ReturnIntInstruction = "vreturn";
+		public static readonly string ReturnPointerInstruction = "vreturn";
 		public static readonly string ReturnInstruction = "return";
 		public static readonly string AddIntInstruction = "iadd";
 		public static readonly string SubIntInstruction = "isub";
@@ -28,10 +28,10 @@ namespace Scrappy.Compiler
 		public static readonly string IfPointerNotNullInstruction = "ifnotnull";
 		public static readonly string IfPointerNullInstruction = "ifnull";
 		public static readonly string NewArrayInstruction = "newarray";
-		public static readonly string LoadIntInstruction = "iload";
-		public static readonly string LoadPointerInstruction = "pload";
-		public static readonly string StoreIntInstruction = "istore";
-		public static readonly string StorePointerInstruction = "pstore";
+		public static readonly string LoadIntInstruction = "vload";
+		public static readonly string LoadPointerInstruction = "vload";
+		public static readonly string StoreIntInstruction = "vstore";
+		public static readonly string StorePointerInstruction = "vstore";
 		public static readonly string JumpInstruction = "jump";
 		public static readonly string NewStringInstruction = "newstring";
 	    public static readonly string DupInstruction = "dup";
