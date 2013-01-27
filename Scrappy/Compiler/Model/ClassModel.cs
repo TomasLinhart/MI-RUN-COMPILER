@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using Scrappy.Parser.Nodes;
 using Scrappy.Parser.Nodes.Expressions;
+using Scrappy.Parser.Nodes.Statements;
 
 namespace Scrappy.Compiler.Model
 {
@@ -121,12 +122,18 @@ namespace Scrappy.Compiler.Model
 			builder.AppendLine("\t\t</fields>");
 
 			builder.AppendLine("\t\t<methods>");
-			foreach (var method in Methods)
+			if (Methods.Count(m => m.Name == "New" && m.Arguments.Count == 0) == 0)
+			{
+			    var method = new MethodModel("New", Name, new Block(new Sequence<Statement>()));
+                method.Compile(CompilationModel);
+                builder.Append(method.ToXml());
+			}
+            foreach (var method in Methods)
 			{
 				builder.Append(method.ToXml());
 			}
 			builder.AppendLine("\t\t</methods>");
-			
+            
 			builder.AppendLine("\t</class>");
 			return builder.ToString();
 		}

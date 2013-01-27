@@ -128,6 +128,15 @@
 		<fields>
 		</fields>
 		<methods>
+			<method name="New" type="EntryPoint">
+				<args>
+				</args>
+				<locals>
+				</locals>
+				<instructions>
+					<instruction>return</instruction> <!-- Added by compiler -->
+				</instructions>
+			</method>
 			<method name="Entry" type="Unit">
 				<args>
 					<arg name="args" type="Array" />
@@ -335,6 +344,15 @@
 		<methods>
 			<method name="New" type="Item">
 				<args>
+				</args>
+				<locals>
+				</locals>
+				<instructions>
+					<instruction>return</instruction> <!-- Added by compiler -->
+				</instructions>
+			</method>
+			<method name="New" type="Item">
+				<args>
 					<arg name="weight" type="Integer" />
 					<arg name="price" type="Integer" />
 				</args>
@@ -360,6 +378,15 @@
 			<field name="Items" type="List" />
 		</fields>
 		<methods>
+			<method name="New" type="Instance">
+				<args>
+				</args>
+				<locals>
+				</locals>
+				<instructions>
+					<instruction>return</instruction> <!-- Added by compiler -->
+				</instructions>
+			</method>
 			<method name="New" type="Instance">
 				<args>
 					<arg name="quantity" type="Integer" />
@@ -392,6 +419,15 @@
 			<field name="BestSolution" type="List" />
 		</fields>
 		<methods>
+			<method name="New" type="Solver">
+				<args>
+				</args>
+				<locals>
+				</locals>
+				<instructions>
+					<instruction>return</instruction> <!-- Added by compiler -->
+				</instructions>
+			</method>
 			<method name="New" type="Solver">
 				<args>
 					<arg name="instance" type="Instance" />

@@ -4,6 +4,15 @@
 		<fields>
 		</fields>
 		<methods>
+			<method name="New" type="A">
+				<args>
+				</args>
+				<locals>
+				</locals>
+				<instructions>
+					<instruction>return</instruction> <!-- Added by compiler -->
+				</instructions>
+			</method>
 			<method name="Test" type="String">
 				<args>
 				</args>
@@ -21,6 +30,15 @@
 		<fields>
 		</fields>
 		<methods>
+			<method name="New" type="B">
+				<args>
+				</args>
+				<locals>
+				</locals>
+				<instructions>
+					<instruction>return</instruction> <!-- Added by compiler -->
+				</instructions>
+			</method>
 			<method name="Test" type="String">
 				<args>
 				</args>
@@ -62,6 +80,15 @@
 		<fields>
 		</fields>
 		<methods>
+			<method name="New" type="EntryPoint">
+				<args>
+				</args>
+				<locals>
+				</locals>
+				<instructions>
+					<instruction>return</instruction> <!-- Added by compiler -->
+				</instructions>
+			</method>
 			<method name="Entry" type="Unit">
 				<args>
 					<arg name="args" type="Array" />
