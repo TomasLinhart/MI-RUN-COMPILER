@@ -19,3 +19,28 @@ $ mono Scrappy.exe Examples/Knapsack.sp
 [2] : http://www.go-mono.com/mono-downloads/download.html
 [3] : http://monodevelop.com/Download
 [4] : http://code.google.com/p/bsn-goldparser/issues/detail?id=8
+
+=== Změny v nové verzi ===
+
+Přibyla podpora pro dědičnost a metody jsou spouštěny pomocí dynamic dispatch a tím pádem kompilátor již neověřuje existence metod. Plus jsou při dědičnosti zkopírovány fieldy do potomků, které dědí z dané třídy.
+
+Třída, která chce dědit se zapisuje
+
+```
+class B : A
+
+-- something
+
+end
+```
+
+Pokud není uvedeno odkud dědí, tak dědí z Any.
+
+Když chci použít rodiče, tak volám parent::xxx()
+
+Když chci volat vyššího rodiče, tak uvedu název A::xxx()
+
+V instrukcí to teď vypadá takto 
+<instruction>invokevirtual Instance::New::3</instruction>
+
+Instance tam nemusí být v případě, že není v kódu určena třída, na které se má metoda volat. Číslo značí počet argumentů.
