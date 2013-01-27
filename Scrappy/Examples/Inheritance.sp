@@ -1,6 +1,8 @@
 ﻿module Inheritance
 
 	class A
+		@A : Integer
+
 		def Test() : String
 			return "A"
 		end
@@ -11,6 +13,8 @@
 	end
 
 	class B : A
+		@B : Integer
+
 		def Test() : String
 			return "B"
 		end
@@ -29,6 +33,7 @@
 	end
 	
 	class C : B
+		@C : Integer
 	
 	end
 	

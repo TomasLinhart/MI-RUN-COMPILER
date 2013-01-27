@@ -17,7 +17,7 @@ namespace Scrappy.Compiler.Model
 		public List<MethodModel> Methods { get; private set; }
 		public CompilationModel CompilationModel { get; private set; }
         public ClassModel ParentClassModel { get { return CompilationModel.GetClass(ParentName); } }
-
+        
         public ClassModel(string name, CompilationModel model, bool skip = false)
             : this(name, "Any", model, skip) { }
 
@@ -30,7 +30,7 @@ namespace Scrappy.Compiler.Model
 			Fields = new List<FieldModel>();
 			Methods = new List<MethodModel>();
 		}
-
+        
 		public int GetFieldIndex(string field)
 		{
 			var index = Fields.IndexOf(Fields.SingleOrDefault(f => f.Name == field));
@@ -101,6 +101,11 @@ namespace Scrappy.Compiler.Model
         public void Compile(CompilationModel model)
         {
             // fields are already precompiled
+
+            // add fields from parent and keep order
+            var oldFields = Fields;
+            Fields = new List<FieldModel>(ParentClassModel.Fields);
+            Fields.AddRange(oldFields);
 
             foreach (var methodModel in Methods)
             {
