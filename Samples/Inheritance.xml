@@ -4,7 +4,7 @@
 		<fields>
 		</fields>
 		<methods>
-			<method name="Test::0" type="String">
+			<method name="Test" type="String">
 				<args>
 				</args>
 				<locals>
@@ -21,7 +21,7 @@
 		<fields>
 		</fields>
 		<methods>
-			<method name="Test::0" type="String">
+			<method name="Test" type="String">
 				<args>
 				</args>
 				<locals>
@@ -32,7 +32,7 @@
 					<instruction>vreturn</instruction> <!-- Line: 11 return "B" -->
 				</instructions>
 			</method>
-			<method name="MyTest::0" type="String">
+			<method name="MyTest" type="String">
 				<args>
 				</args>
 				<locals>
@@ -40,11 +40,11 @@
 				</locals>
 				<instructions>
 					<instruction>vload 0</instruction> <!-- Line: 15 return parent::Test() - loading self -->
-					<instruction>invokevirtual A::Test:0</instruction> <!-- Line: 15 return parent::Test() - doing method call -->
+					<instruction>invokevirtual A::Test::0</instruction> <!-- Line: 15 return parent::Test() - doing method call -->
 					<instruction>vreturn</instruction> <!-- Line: 15 return parent::Test() -->
 				</instructions>
 			</method>
-			<method name="SecondTest::0" type="String">
+			<method name="SecondTest" type="String">
 				<args>
 				</args>
 				<locals>
@@ -52,7 +52,7 @@
 				</locals>
 				<instructions>
 					<instruction>vload 0</instruction> <!-- Line: 19 return A::Test() - loading self -->
-					<instruction>invokevirtual A::Test:0</instruction> <!-- Line: 19 return A::Test() - doing method call -->
+					<instruction>invokevirtual A::Test::0</instruction> <!-- Line: 19 return A::Test() - doing method call -->
 					<instruction>vreturn</instruction> <!-- Line: 19 return A::Test() -->
 				</instructions>
 			</method>
@@ -62,7 +62,7 @@
 		<fields>
 		</fields>
 		<methods>
-			<method name="Entry::1" type="Unit">
+			<method name="Entry" type="Unit">
 				<args>
 					<arg name="args" type="Array" />
 				</args>
