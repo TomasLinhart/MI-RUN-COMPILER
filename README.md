@@ -1,4 +1,4 @@
-==== Scrappy Compiler ====
+# Scrappy Compiler
 
 Scrappy kompilátor byl vyvinut za použití GOLD Parseru[0] využívají .NET engine bsn-goldparser[1]. Kompilátor tedy je napsán v .NET v jazyce C#. Gramatika byla napsána  v GOLD Parser syntaxi a následně přeložena a vytvořena nezbytná mapování na jednotlivé uzly gramatiky. Jakmile proběhne namapování, tak proběhne kompilace.
 
@@ -20,7 +20,7 @@ $ mono Scrappy.exe Examples/Knapsack.sp
 [3] : http://monodevelop.com/Download
 [4] : http://code.google.com/p/bsn-goldparser/issues/detail?id=8
 
-=== Změny v nové verzi ===
+## Změny v nové verzi
 
 Přibyla podpora pro dědičnost a metody jsou spouštěny pomocí dynamic dispatch a tím pádem kompilátor již neověřuje existence metod. Plus jsou při dědičnosti zkopírovány fieldy do potomků, které dědí z dané třídy.
 

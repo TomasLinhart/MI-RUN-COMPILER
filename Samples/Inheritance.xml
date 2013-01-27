@@ -123,6 +123,109 @@
 			</method>
 		</methods>
 	</class>
+	<class name="X" parentName="Any">
+		<fields>
+		</fields>
+		<methods>
+			<method name="New" type="X">
+				<args>
+				</args>
+				<locals>
+				</locals>
+				<instructions>
+					<instruction>return</instruction> <!-- Added by compiler -->
+				</instructions>
+			</method>
+			<method name="Test" type="String">
+				<args>
+				</args>
+				<locals>
+					<local name="$__tmp" type="Any" />
+				</locals>
+				<instructions>
+					<instruction>newstring #X</instruction> <!-- Line: 43 return "X" -->
+					<instruction>vreturn</instruction> <!-- Line: 43 return "X" -->
+				</instructions>
+			</method>
+			<method name="Test2" type="String">
+				<args>
+				</args>
+				<locals>
+					<local name="$__tmp" type="Any" />
+				</locals>
+				<instructions>
+					<instruction>newstring #X</instruction> <!-- Line: 47 return "X" -->
+					<instruction>vreturn</instruction> <!-- Line: 47 return "X" -->
+				</instructions>
+			</method>
+		</methods>
+	</class>
+	<class name="Y" parentName="X">
+		<fields>
+		</fields>
+		<methods>
+			<method name="New" type="Y">
+				<args>
+				</args>
+				<locals>
+				</locals>
+				<instructions>
+					<instruction>return</instruction> <!-- Added by compiler -->
+				</instructions>
+			</method>
+			<method name="Test" type="String">
+				<args>
+				</args>
+				<locals>
+					<local name="$__tmp" type="Any" />
+				</locals>
+				<instructions>
+					<instruction>vload 0</instruction> <!-- Line: 55 return parent::Test() - loading self -->
+					<instruction>invokevirtual X::Test::0</instruction> <!-- Line: 55 return parent::Test() - doing method call -->
+					<instruction>vreturn</instruction> <!-- Line: 55 return parent::Test() -->
+				</instructions>
+			</method>
+			<method name="Test2" type="String">
+				<args>
+				</args>
+				<locals>
+					<local name="$__tmp" type="Any" />
+				</locals>
+				<instructions>
+					<instruction>vload 0</instruction> <!-- Line: 59 return parent::Test() - loading self -->
+					<instruction>invokevirtual X::Test::0</instruction> <!-- Line: 59 return parent::Test() - doing method call -->
+					<instruction>vreturn</instruction> <!-- Line: 59 return parent::Test() -->
+				</instructions>
+			</method>
+		</methods>
+	</class>
+	<class name="Z" parentName="Y">
+		<fields>
+		</fields>
+		<methods>
+			<method name="New" type="Z">
+				<args>
+				</args>
+				<locals>
+				</locals>
+				<instructions>
+					<instruction>return</instruction> <!-- Added by compiler -->
+				</instructions>
+			</method>
+			<method name="Test2" type="String">
+				<args>
+				</args>
+				<locals>
+					<local name="$__tmp" type="Any" />
+				</locals>
+				<instructions>
+					<instruction>vload 0</instruction> <!-- Line: 67 return parent::Test() - loading self -->
+					<instruction>invokevirtual Y::Test::0</instruction> <!-- Line: 67 return parent::Test() - doing method call -->
+					<instruction>vreturn</instruction> <!-- Line: 67 return parent::Test() -->
+				</instructions>
+			</method>
+		</methods>
+	</class>
 	<class name="EntryPoint" parentName="Any">
 		<fields>
 		</fields>
@@ -144,57 +247,70 @@
 					<local name="b" type="B" />
 					<local name="a" type="A" />
 					<local name="c" type="C" />
+					<local name="z" type="Z" />
 					<local name="$__tmp" type="Any" />
 				</locals>
 				<instructions>
-					<instruction>new B</instruction> <!-- Line: 43 let b : B = B#New() - creating new instance -->
-					<instruction>vstore 5</instruction> <!-- Line: 43 let b : B = B#New() - storing in tmp variable -->
-					<instruction>vload 5</instruction> <!-- Line: 43 let b : B = B#New() - loading from tmp variable -->
-					<instruction>invokevirtual ::New::0</instruction> <!-- Line: 43 let b : B = B#New() - doing method call -->
-					<instruction>vload 5</instruction> <!-- Line: 43 let b : B = B#New() - loading from tmp variable -->
-					<instruction>vstore 2</instruction> <!-- Line: 43 let b : B = B#New() -->
-					<instruction>vload 2</instruction> <!-- Line: 44 b#Test() -->
-					<instruction>invokevirtual ::Test::0</instruction> <!-- Line: 44 b#Test() - doing method call -->
-					<instruction>syscall 1</instruction> <!-- Line: 45 emit "syscall 1" // print  string -->
-					<instruction>vload 2</instruction> <!-- Line: 46 b#MyTest() -->
-					<instruction>invokevirtual ::MyTest::0</instruction> <!-- Line: 46 b#MyTest() - doing method call -->
-					<instruction>syscall 1</instruction> <!-- Line: 47 emit "syscall 1" // print  string -->
-					<instruction>vload 2</instruction> <!-- Line: 48 b#SecondTest() -->
-					<instruction>invokevirtual ::SecondTest::0</instruction> <!-- Line: 48 b#SecondTest() - doing method call -->
-					<instruction>syscall 1</instruction> <!-- Line: 49 emit "syscall 1" // print  string -->
-					<instruction>new A</instruction> <!-- Line: 50 let a : A = A#New() - creating new instance -->
-					<instruction>vstore 5</instruction> <!-- Line: 50 let a : A = A#New() - storing in tmp variable -->
-					<instruction>vload 5</instruction> <!-- Line: 50 let a : A = A#New() - loading from tmp variable -->
-					<instruction>invokevirtual ::New::0</instruction> <!-- Line: 50 let a : A = A#New() - doing method call -->
-					<instruction>vload 5</instruction> <!-- Line: 50 let a : A = A#New() - loading from tmp variable -->
-					<instruction>vstore 3</instruction> <!-- Line: 50 let a : A = A#New() -->
-					<instruction>vload 2</instruction> <!-- Line: 51 a = b -->
-					<instruction>vstore 3</instruction> <!-- Line: 51 a = b - assigning variable -->
-					<instruction>vload 3</instruction> <!-- Line: 52 a#Test() -->
-					<instruction>invokevirtual ::Test::0</instruction> <!-- Line: 52 a#Test() - doing method call -->
-					<instruction>syscall 1</instruction> <!-- Line: 53 emit "syscall 1" // print  string -->
-					<instruction>new A</instruction> <!-- Line: 54 a = A#New() - creating new instance -->
-					<instruction>vstore 5</instruction> <!-- Line: 54 a = A#New() - storing in tmp variable -->
-					<instruction>vload 5</instruction> <!-- Line: 54 a = A#New() - loading from tmp variable -->
-					<instruction>invokevirtual ::New::0</instruction> <!-- Line: 54 a = A#New() - doing method call -->
-					<instruction>vload 5</instruction> <!-- Line: 54 a = A#New() - loading from tmp variable -->
-					<instruction>vstore 3</instruction> <!-- Line: 54 a = A#New() - assigning variable -->
-					<instruction>new C</instruction> <!-- Line: 55 let c : C = C#New() - creating new instance -->
-					<instruction>vstore 5</instruction> <!-- Line: 55 let c : C = C#New() - storing in tmp variable -->
-					<instruction>vload 5</instruction> <!-- Line: 55 let c : C = C#New() - loading from tmp variable -->
-					<instruction>invokevirtual ::New::0</instruction> <!-- Line: 55 let c : C = C#New() - doing method call -->
-					<instruction>vload 5</instruction> <!-- Line: 55 let c : C = C#New() - loading from tmp variable -->
-					<instruction>vstore 4</instruction> <!-- Line: 55 let c : C = C#New() -->
-					<instruction>ipush 1</instruction> <!-- Line: 56 c#Test(1, a) -->
-					<instruction>vload 3</instruction> <!-- Line: 56 c#Test(1, a) -->
-					<instruction>vload 4</instruction> <!-- Line: 56 c#Test(1, a) -->
-					<instruction>invokevirtual ::Test::2</instruction> <!-- Line: 56 c#Test(1, a) - doing method call -->
-					<instruction>syscall 1</instruction> <!-- Line: 57 emit "syscall 1" // print  string -->
-					<instruction>ipush 1</instruction> <!-- Line: 58 c#Test(1, b) -->
-					<instruction>vload 2</instruction> <!-- Line: 58 c#Test(1, b) -->
-					<instruction>vload 4</instruction> <!-- Line: 58 c#Test(1, b) -->
-					<instruction>invokevirtual ::Test::2</instruction> <!-- Line: 58 c#Test(1, b) - doing method call -->
-					<instruction>syscall 1</instruction> <!-- Line: 59 emit "syscall 1" // print  string -->
+					<instruction>new B</instruction> <!-- Line: 75 let b : B = B#New() - creating new instance -->
+					<instruction>vstore 6</instruction> <!-- Line: 75 let b : B = B#New() - storing in tmp variable -->
+					<instruction>vload 6</instruction> <!-- Line: 75 let b : B = B#New() - loading from tmp variable -->
+					<instruction>invokevirtual ::New::0</instruction> <!-- Line: 75 let b : B = B#New() - doing method call -->
+					<instruction>vload 6</instruction> <!-- Line: 75 let b : B = B#New() - loading from tmp variable -->
+					<instruction>vstore 2</instruction> <!-- Line: 75 let b : B = B#New() -->
+					<instruction>vload 2</instruction> <!-- Line: 76 b#Test() -->
+					<instruction>invokevirtual ::Test::0</instruction> <!-- Line: 76 b#Test() - doing method call -->
+					<instruction>syscall 1</instruction> <!-- Line: 77 emit "syscall 1" // print  string -->
+					<instruction>vload 2</instruction> <!-- Line: 78 b#MyTest() -->
+					<instruction>invokevirtual ::MyTest::0</instruction> <!-- Line: 78 b#MyTest() - doing method call -->
+					<instruction>syscall 1</instruction> <!-- Line: 79 emit "syscall 1" // print  string -->
+					<instruction>vload 2</instruction> <!-- Line: 80 b#SecondTest() -->
+					<instruction>invokevirtual ::SecondTest::0</instruction> <!-- Line: 80 b#SecondTest() - doing method call -->
+					<instruction>syscall 1</instruction> <!-- Line: 81 emit "syscall 1" // print  string -->
+					<instruction>new A</instruction> <!-- Line: 82 let a : A = A#New() - creating new instance -->
+					<instruction>vstore 6</instruction> <!-- Line: 82 let a : A = A#New() - storing in tmp variable -->
+					<instruction>vload 6</instruction> <!-- Line: 82 let a : A = A#New() - loading from tmp variable -->
+					<instruction>invokevirtual ::New::0</instruction> <!-- Line: 82 let a : A = A#New() - doing method call -->
+					<instruction>vload 6</instruction> <!-- Line: 82 let a : A = A#New() - loading from tmp variable -->
+					<instruction>vstore 3</instruction> <!-- Line: 82 let a : A = A#New() -->
+					<instruction>vload 2</instruction> <!-- Line: 83 a = b -->
+					<instruction>vstore 3</instruction> <!-- Line: 83 a = b - assigning variable -->
+					<instruction>vload 3</instruction> <!-- Line: 84 a#Test() -->
+					<instruction>invokevirtual ::Test::0</instruction> <!-- Line: 84 a#Test() - doing method call -->
+					<instruction>syscall 1</instruction> <!-- Line: 85 emit "syscall 1" // print  string -->
+					<instruction>new A</instruction> <!-- Line: 86 a = A#New() - creating new instance -->
+					<instruction>vstore 6</instruction> <!-- Line: 86 a = A#New() - storing in tmp variable -->
+					<instruction>vload 6</instruction> <!-- Line: 86 a = A#New() - loading from tmp variable -->
+					<instruction>invokevirtual ::New::0</instruction> <!-- Line: 86 a = A#New() - doing method call -->
+					<instruction>vload 6</instruction> <!-- Line: 86 a = A#New() - loading from tmp variable -->
+					<instruction>vstore 3</instruction> <!-- Line: 86 a = A#New() - assigning variable -->
+					<instruction>new C</instruction> <!-- Line: 87 let c : C = C#New() - creating new instance -->
+					<instruction>vstore 6</instruction> <!-- Line: 87 let c : C = C#New() - storing in tmp variable -->
+					<instruction>vload 6</instruction> <!-- Line: 87 let c : C = C#New() - loading from tmp variable -->
+					<instruction>invokevirtual ::New::0</instruction> <!-- Line: 87 let c : C = C#New() - doing method call -->
+					<instruction>vload 6</instruction> <!-- Line: 87 let c : C = C#New() - loading from tmp variable -->
+					<instruction>vstore 4</instruction> <!-- Line: 87 let c : C = C#New() -->
+					<instruction>ipush 1</instruction> <!-- Line: 88 c#Test(1, a) -->
+					<instruction>vload 3</instruction> <!-- Line: 88 c#Test(1, a) -->
+					<instruction>vload 4</instruction> <!-- Line: 88 c#Test(1, a) -->
+					<instruction>invokevirtual ::Test::2</instruction> <!-- Line: 88 c#Test(1, a) - doing method call -->
+					<instruction>syscall 1</instruction> <!-- Line: 89 emit "syscall 1" // print  string -->
+					<instruction>ipush 1</instruction> <!-- Line: 90 c#Test(1, b) -->
+					<instruction>vload 2</instruction> <!-- Line: 90 c#Test(1, b) -->
+					<instruction>vload 4</instruction> <!-- Line: 90 c#Test(1, b) -->
+					<instruction>invokevirtual ::Test::2</instruction> <!-- Line: 90 c#Test(1, b) - doing method call -->
+					<instruction>syscall 1</instruction> <!-- Line: 91 emit "syscall 1" // print  string -->
+					<instruction>new Z</instruction> <!-- Line: 92 let z : Z = Z#New() - creating new instance -->
+					<instruction>vstore 6</instruction> <!-- Line: 92 let z : Z = Z#New() - storing in tmp variable -->
+					<instruction>vload 6</instruction> <!-- Line: 92 let z : Z = Z#New() - loading from tmp variable -->
+					<instruction>invokevirtual ::New::0</instruction> <!-- Line: 92 let z : Z = Z#New() - doing method call -->
+					<instruction>vload 6</instruction> <!-- Line: 92 let z : Z = Z#New() - loading from tmp variable -->
+					<instruction>vstore 5</instruction> <!-- Line: 92 let z : Z = Z#New() -->
+					<instruction>vload 5</instruction> <!-- Line: 93 z#Test() -->
+					<instruction>invokevirtual ::Test::0</instruction> <!-- Line: 93 z#Test() - doing method call -->
+					<instruction>syscall 1</instruction> <!-- Line: 94 emit "syscall 1" // print  string -->
+					<instruction>vload 5</instruction> <!-- Line: 95 z#Test2() -->
+					<instruction>invokevirtual ::Test2::0</instruction> <!-- Line: 95 z#Test2() - doing method call -->
+					<instruction>syscall 1</instruction> <!-- Line: 96 emit "syscall 1" // print  string -->
 					<instruction>return</instruction> <!-- Added by compiler -->
 				</instructions>
 			</method>

@@ -36,6 +36,38 @@
 		@C : Integer
 	
 	end
+
+	class X
+		
+		def Test() : String
+			return "X"
+		end
+
+		def Test2() : String
+			return "X"
+		end
+
+	end
+
+	class Y : X
+
+		def Test() : String
+			return parent::Test()
+		end
+
+		def Test2() : String
+			return parent::Test()
+		end
+
+	end
+
+	class Z : Y
+
+		def Test2() : String
+			return parent::Test()
+		end
+
+	end
 	
 	class EntryPoint
 
@@ -56,6 +88,11 @@
 		c#Test(1, a)
 		emit "syscall 1" -- print  string
 		c#Test(1, b)
+		emit "syscall 1" -- print  string
+		let z : Z = Z#New()
+		z#Test()
+		emit "syscall 1" -- print  string
+		z#Test2()
 		emit "syscall 1" -- print  string
     end
   end
