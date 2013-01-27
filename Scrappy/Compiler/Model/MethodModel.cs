@@ -36,7 +36,7 @@ namespace Scrappy.Compiler.Model
 		{
 			StringBuilder builder = new StringBuilder();
 
-            builder.AppendFormat("\t\t\t<method name=\"{0}\" type=\"{1}\">", FullName, Type);
+            builder.AppendFormat("\t\t\t<method name=\"{0}::{1}\" type=\"{2}\">", Name, Arguments.Count, Type);
 
 			builder.AppendLine();
 

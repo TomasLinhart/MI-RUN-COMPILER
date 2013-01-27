@@ -56,7 +56,7 @@ namespace Scrappy.Parser.Nodes.Expressions
             
             try
             {
-                instructions.Add(new InstructionModel(Instructions.CallInstruction, string.Format("{0}{1}:{2}", classModel.Name != FindParent<Class>().Name ? classModel.Name + "::" : string.Empty, Method, Parameters.Count())) { Comment = model.GetComment(this) + " - doing method call" });
+                instructions.Add(new InstructionModel(Instructions.CallInstruction, string.Format("{0}::{1}:{2}", classModel.Name != FindParent<Class>().Name ? classModel.Name : string.Empty, Method, Parameters.Count())) { Comment = model.GetComment(this) + " - doing method call" });
             }
             catch (Exception e)
             {

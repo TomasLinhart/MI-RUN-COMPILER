@@ -4,7 +4,7 @@
 		<fields>
 		</fields>
 		<methods>
-			<method name="Test:" type="String">
+			<method name="Test::0" type="String">
 				<args>
 				</args>
 				<locals>
@@ -21,7 +21,7 @@
 		<fields>
 		</fields>
 		<methods>
-			<method name="Test:" type="String">
+			<method name="Test::0" type="String">
 				<args>
 				</args>
 				<locals>
@@ -32,7 +32,7 @@
 					<instruction>vreturn</instruction> <!-- Line: 11 return "B" -->
 				</instructions>
 			</method>
-			<method name="MyTest:" type="String">
+			<method name="MyTest::0" type="String">
 				<args>
 				</args>
 				<locals>
@@ -44,7 +44,7 @@
 					<instruction>vreturn</instruction> <!-- Line: 15 return parent::Test() -->
 				</instructions>
 			</method>
-			<method name="SecondTest:" type="String">
+			<method name="SecondTest::0" type="String">
 				<args>
 				</args>
 				<locals>
@@ -62,7 +62,7 @@
 		<fields>
 		</fields>
 		<methods>
-			<method name="Entry:Array" type="Unit">
+			<method name="Entry::1" type="Unit">
 				<args>
 					<arg name="args" type="Array" />
 				</args>
@@ -75,28 +75,28 @@
 					<instruction>new B</instruction> <!-- Line: 26 let b : B = B#New() - creating new instance -->
 					<instruction>vstore 4</instruction> <!-- Line: 26 let b : B = B#New() - storing in tmp variable -->
 					<instruction>vload 4</instruction> <!-- Line: 26 let b : B = B#New() - loading from tmp variable -->
-					<instruction>invokevirtual New:0</instruction> <!-- Line: 26 let b : B = B#New() - doing method call -->
+					<instruction>invokevirtual ::New::0</instruction> <!-- Line: 26 let b : B = B#New() - doing method call -->
 					<instruction>vload 4</instruction> <!-- Line: 26 let b : B = B#New() - loading from tmp variable -->
 					<instruction>vstore 2</instruction> <!-- Line: 26 let b : B = B#New() -->
 					<instruction>vload 2</instruction> <!-- Line: 27 b#Test() -->
-					<instruction>invokevirtual Test:0</instruction> <!-- Line: 27 b#Test() - doing method call -->
+					<instruction>invokevirtual ::Test::0</instruction> <!-- Line: 27 b#Test() - doing method call -->
 					<instruction>syscall 1</instruction> <!-- Line: 28 emit "syscall 1" // print  string -->
 					<instruction>vload 2</instruction> <!-- Line: 29 b#MyTest() -->
-					<instruction>invokevirtual MyTest:0</instruction> <!-- Line: 29 b#MyTest() - doing method call -->
+					<instruction>invokevirtual ::MyTest::0</instruction> <!-- Line: 29 b#MyTest() - doing method call -->
 					<instruction>syscall 1</instruction> <!-- Line: 30 emit "syscall 1" // print  string -->
 					<instruction>vload 2</instruction> <!-- Line: 31 b#SecondTest() -->
-					<instruction>invokevirtual SecondTest:0</instruction> <!-- Line: 31 b#SecondTest() - doing method call -->
+					<instruction>invokevirtual ::SecondTest::0</instruction> <!-- Line: 31 b#SecondTest() - doing method call -->
 					<instruction>syscall 1</instruction> <!-- Line: 32 emit "syscall 1" // print  string -->
 					<instruction>new A</instruction> <!-- Line: 33 let a : A = A#New() - creating new instance -->
 					<instruction>vstore 4</instruction> <!-- Line: 33 let a : A = A#New() - storing in tmp variable -->
 					<instruction>vload 4</instruction> <!-- Line: 33 let a : A = A#New() - loading from tmp variable -->
-					<instruction>invokevirtual New:0</instruction> <!-- Line: 33 let a : A = A#New() - doing method call -->
+					<instruction>invokevirtual ::New::0</instruction> <!-- Line: 33 let a : A = A#New() - doing method call -->
 					<instruction>vload 4</instruction> <!-- Line: 33 let a : A = A#New() - loading from tmp variable -->
 					<instruction>vstore 3</instruction> <!-- Line: 33 let a : A = A#New() -->
 					<instruction>vload 2</instruction> <!-- Line: 34 a = b -->
 					<instruction>vstore 3</instruction> <!-- Line: 34 a = b - assigning variable -->
 					<instruction>vload 3</instruction> <!-- Line: 35 a#Test() -->
-					<instruction>invokevirtual Test:0</instruction> <!-- Line: 35 a#Test() - doing method call -->
+					<instruction>invokevirtual ::Test::0</instruction> <!-- Line: 35 a#Test() - doing method call -->
 					<instruction>syscall 1</instruction> <!-- Line: 36 emit "syscall 1" // print  string -->
 					<instruction>return</instruction> <!-- Added by compiler -->
 				</instructions>
