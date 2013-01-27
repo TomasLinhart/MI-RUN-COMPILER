@@ -20,4 +20,21 @@
 		end
 	end
 
+	class EntryPoint
+
+    def Entry(args : Array) : Unit -- this method is launched by interpreter
+		let b : B = B#New()
+		b#Test()
+		emit "syscall 1" -- print  string
+		b#MyTest()
+		emit "syscall 1" -- print  string
+		b#SecondTest()
+		emit "syscall 1" -- print  string
+		let a : A = A#New()
+		a = b
+		a#Test()
+		emit "syscall 1" -- print  string
+    end
+  end
+
 end

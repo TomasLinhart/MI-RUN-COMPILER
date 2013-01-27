@@ -2,11 +2,11 @@ module Scrappy
 
   class List
     @Length : Integer
-    @ArrayPointer : Integer
+    @ArrayPointer : Array
 
     def New() : List
       emit "getfield 1"
-      emit "invokevirtual Array::size:"
+      emit "invokevirtual ::size:"
       emit "vload 0"
       emit "setfield 0"
       emit "return"
